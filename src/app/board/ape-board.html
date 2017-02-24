@@ -1,0 +1,62 @@
+<link rel="import" href="../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../shared/container/ape-container.html">
+
+<dom-module id="ape-board">
+
+    <template>
+
+        <style>
+
+            :host {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                padding: 1.6rem;
+            }
+
+            div {
+                flex-shrink: 0;
+                background-color: #efefef;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            ape-container {
+                flex-grow: 1;
+            }
+
+        </style>
+
+        <div id="drag" draggable="true">Drag me</div>
+
+        <ape-container></ape-container>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `ape-board`,
+
+            behaviors: [
+
+            ],
+
+            properties: {
+
+            },
+
+            /* Life cycle */
+
+            ready() {
+
+            },
+
+            /* Functions */
+
+        });
+
+    </script>
+
+</dom-module>
