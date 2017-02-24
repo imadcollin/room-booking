@@ -23,30 +23,28 @@
             is: `ape-container`,
 
             attached() {
-                this.listen(this, `dragstart`, `_listenerDragStart`);
+                // this.listen(this, `dragstart`, `_listenerDragStart`);
                 this.listen(this, `dragover`, `_listenerDragOver`);
                 this.listen(this, `drop`, `_listenerDrop`);
             },
 
             detached() {
-                this.unlisten(this, `dragstart`, `_listenerDragStart`);
+                // this.unlisten(this, `dragstart`, `_listenerDragStart`);
                 this.unlisten(this, `dragover`, `_listenerDragOver`);
                 this.unlisten(this, `drop`, `_listenerDrop`);
             },
 
             /* Listeners */
 
-            _listenerDragStart(event) {
-                console.log(`Drag start`);
-            },
+            // _listenerDragStart(event) {
+            //     console.log(`Drag start`);
+            // },
 
             _listenerDragOver(event) {
-                console.log(`Drag over`);
                 event.preventDefault();
             },
 
             _listenerDrop(event) {
-                console.log(`Drop`);
                 event.preventDefault();
                 let div = document.createElement(`div`);
                 div.innerText = `I was dropped!`;
