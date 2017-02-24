@@ -1,0 +1,82 @@
+<link rel="import" href="../../../assets/libs/polymer/polymer.html">
+
+<dom-module id="x-pages">
+
+    <template>
+
+        <style>
+
+            :host {
+                display: block;
+            }
+
+            :host ::content > :not([visible]) {
+                display: none !important;
+            }
+
+            :host([hidden]) {
+                display: none;
+            }
+
+        </style>
+
+        <content></content>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `x-pages`,
+
+            properties: {
+                selected: {
+                    type: String,
+                    observer: `_selectedChanged`
+                },
+                autoScroll: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+
+            _selectedChanged: function(newValue, oldValue) {
+                this._autoScrollToTop();
+                const childs = Polymer.dom(this).querySelectorAll(`[pattern]`);
+                for (let i = 0; i < childs.length; i++) {
+                    const child = childs[i];
+                    const pattern = child.getAttribute(`pattern`);
+                    const regex = new RegExp(pattern);
+                    if (regex.test(newValue)) {
+                        this._activateChild(child);
+                    } else if (regex.test(oldValue)) {
+                        this._deactivateChild(child);
+                    }
+                }
+                this.fire(`page-change`, {current: newValue, previous: oldValue});
+            },
+
+            _activateChild: function(child) {
+                if (child !== null && typeof child !== `undefined`) {
+                    child.setAttribute(`visible`, ``);
+                }
+            },
+
+            _deactivateChild: function(child) {
+                if (child !== null && typeof child !== `undefined`) {
+                    child.removeAttribute(`visible`);
+                }
+            },
+
+            _autoScrollToTop: function() {
+                if (this.autoScroll) {
+                    window.scrollTo(0, 0);
+                }
+            }
+
+        });
+
+    </script>
+
+</dom-module>

@@ -1,0 +1,25 @@
+{
+  "name": "apegroup-web-template",
+  "description": "Progressive Web Application. Hand coded in Stockholm, Sweden.",
+  "main": "index.html",
+  "authors": [
+    "Apegroup AB"
+  ],
+  "license": "Apegroup AB All rights reserved.",
+  "moduleType": [
+    "es6"
+  ],
+  "homepage": "http://apegroup.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.1",
+    "app-route": "PolymerElements/app-route#^0.9.3"
+  }
+}

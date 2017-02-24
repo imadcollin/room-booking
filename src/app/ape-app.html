@@ -1,0 +1,95 @@
+<link rel="import" href="../assets/libs/polymer/polymer.html">
+<link rel="import" href="../assets/libs/app-route/app-route.html">
+<link rel="import" href="../assets/libs/app-route/app-location.html">
+
+<link rel="import" href="../config/config.html">
+<link rel="import" href="shared/pages/x-pages.html">
+
+<dom-module id="ape-app">
+
+    <template>
+
+        <style>
+
+            :host {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header, x-pages {
+                padding: 1.6rem;
+            }
+
+        </style>
+
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:page" data="{{router}}"></app-route>
+
+        <header>
+            <a href="/">Home</a>
+            <a href="/style-guide">Style guide</a>
+        </header>
+
+        <x-pages selected="[[page]]">
+            <ape-home pattern="^home$"></ape-home>
+            <ape-style-guide pattern="^style-guide$"></ape-style-guide>
+        </x-pages>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `ape-app`,
+
+            behaviors: [
+
+            ],
+
+            properties: {
+                router: {
+                    type: Object
+                },
+                page: {
+                    type: String
+                }
+            },
+
+            observers: [
+                `_observeRouterPage(router.page)`
+            ],
+
+            /* Life cycle */
+
+            ready() {
+
+            },
+
+            attached() {
+
+            },
+
+            detached() {
+
+            },
+
+            /* Observers */
+
+            _observeRouterPage(page) {
+                this.page = (page) ? page : `home`;
+                const importHref = `${this.page}/ape-${this.page}.html`;
+                this.importHref(this.resolveUrl(importHref), null, null, true);
+            },
+
+            /* Functions */
+
+            test() {
+                return `test`;
+            }
+
+        });
+
+    </script>
+
+</dom-module>

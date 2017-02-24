@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Webcomponent test</title>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="ape-app.html">
+
+</head>
+
+<body>
+
+    <test-fixture id="basic">
+        <template>
+            <ape-app></ape-app>
+        </template>
+    </test-fixture>
+
+    <script>
+
+        suite(`<ape-app>`, function () {
+
+            let element;
+            setup(() => {
+                element = fixture(`basic`);
+            });
+
+            test(`hello function`, () => {
+                expect(element.test()).to.be.equal(`test`);
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
