@@ -16,8 +16,20 @@
                 flex-direction: column;
             }
 
-            header, x-pages {
-                padding: 1.6rem;
+            header {
+                padding: 0 1.6rem;
+                background-color: #000;
+            }
+
+            h1 {
+                margin: 0.8rem 0;
+                color: #fff;
+            }
+
+            x-pages {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
             }
 
         </style>
@@ -26,12 +38,12 @@
         <app-route route="{{route}}" pattern="/:page" data="{{router}}"></app-route>
 
         <header>
-            <a href="/">Home</a>
-            <a href="/style-guide">Style guide</a>
+            <h1>Apegroup</h1>
         </header>
 
         <x-pages selected="[[page]]">
             <ape-home pattern="^home$"></ape-home>
+            <ape-board pattern="^board$"></ape-board>
             <ape-style-guide pattern="^style-guide$"></ape-style-guide>
         </x-pages>
 
