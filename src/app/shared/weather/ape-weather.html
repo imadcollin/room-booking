@@ -99,21 +99,11 @@
                 // setup weather reference to weather node
                 this.weatherRef = firebase.database().ref(`/weather`);
                 this.weatherRef.on(`value`, data => this.weatherData = data.val());
-
-                // this.listen(this, `dragstart`, `_listenerDragStart`);
             },
 
             detached() {
                 // remove weather reference from weather node
                 this.weatherRef.off();
-
-                // this.unlisten(this, `dragstart`, `_listenerDragStart`);
-            },
-
-            /* Listeners */
-
-            _listenerDragStart(event) {
-                console.log(`Drag start ${event}`);
             },
 
         });
