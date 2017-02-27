@@ -27,6 +27,8 @@
         "mocha": true
     },
     "globals": {
-        "Polymer": true
+        "Polymer": true,
+        "firebase": true,
+        "CONFIG": true
     }
 }
