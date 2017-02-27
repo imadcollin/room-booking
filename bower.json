@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "polymer": "^1.7.1",
-    "app-route": "PolymerElements/app-route#^0.9.3"
+    "app-route": "PolymerElements/app-route#^0.9.3",
+    "polymerfire": "firebase/polymerfire#^0.10.3"
   }
 }
