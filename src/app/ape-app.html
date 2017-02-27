@@ -41,13 +41,9 @@
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{router}}"></app-route>
 
-        <header>
-            <h1>Apegroup</h1>
-        </header>
-
         <x-pages selected="[[page]]">
             <ape-home pattern="^home$"></ape-home>
-            <ape-board pattern="^board$"></ape-board>
+            <ape-board pattern="^board$" layout-3></ape-board>
             <ape-style-guide pattern="^style-guide$"></ape-style-guide>
         </x-pages>
 
