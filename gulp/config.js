@@ -43,6 +43,7 @@ const config = {
     },
     sync: {
         files: [
+            `./build/index.html`,
             `./build/+(app)/**/*.html`,
             `./build/+(app)/**/*.js`
         ],
