@@ -22,7 +22,7 @@
         "**/*.md": false,
         "**/bin": false,
         "**/bower.json": false,
-        "**/.git": false,
+        "**/.git": true,
         "**/.gitignore": false,
         "**/.eslintrc": false,
         "**/.gitattributes": false,
