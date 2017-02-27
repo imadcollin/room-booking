@@ -67,12 +67,10 @@
             <path class="path8" d="M9.749,29.039 L5.956,32.832 C5.345,33.443 5.345,34.433 5.956,35.044 C6.262,35.349 6.662,35.502 7.062,35.502 C7.462,35.502 7.862,35.349 8.168,35.044 L11.96,31.251 C12.572,30.641 12.572,29.65 11.96,29.039 C11.35,28.428 10.36,28.428 9.749,29.039"></path>
             <path class="path9" d="M29.817,12.747 C30.217,12.747 30.617,12.594 30.923,12.289 L34.715,8.497 C35.326,7.886 35.326,6.895 34.715,6.284 C34.104,5.673 33.114,5.673 32.503,6.284 L28.711,10.077 C28.099,10.688 28.099,11.678 28.711,12.289 C29.017,12.595 29.417,12.747 29.817,12.747"></path>
         </svg>
-        <div class="temperature-current">10°</div>
-        <div class="location">Stockholm</div>
-        <div class="description">
-            Det är lite oklart vad det är för väder just nu. Det kan bero på något tekniskt. Oklart som sagt. Återkommer!
-        </div>
-        <div class="wind">6 m/s</div>
+        <div class="temperature-current">[[weatherData.temp.current]]°</div>
+        <div class="location">[[weatherData.locationName]]</div>
+        <div class="description">[[weatherData.description]]</div>
+        <div class="wind">[[weatherData.wind.speed]] m/s</div>
 
     </template>
 
@@ -82,11 +80,33 @@
 
             is: `ape-weather`,
 
+            properties: {
+                weatherData: {
+                    type: Object,
+                    value: function() {
+                        return {};
+                    }
+                },
+                weatherRef: {
+                    type: Object,
+                    value: function() {
+                        return {};
+                    }
+                },
+            },
+
             attached() {
+                // setup weather reference to weather node
+                this.weatherRef = firebase.database().ref(`/weather`);
+                this.weatherRef.on(`value`, data => this.weatherData = data.val());
+
                 // this.listen(this, `dragstart`, `_listenerDragStart`);
             },
 
             detached() {
+                // remove weather reference from weather node
+                this.weatherRef.off();
+
                 // this.unlisten(this, `dragstart`, `_listenerDragStart`);
             },
 
