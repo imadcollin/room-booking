@@ -11,17 +11,11 @@
             }
         </style>
 
-        Start
+        Start[[users]]
 
     </template>
-    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
     <script>
-        firebase.initializeApp(CONFIG.DataBaseConnector);
-        var database = firebase.database();
-        console.log(`Hello from js `, database.ref(`/users`));
-        database.ref(`/users`).on(`value`, function (data) {
-            console.log(`yes`, data.val());
-        });
+
     </script>
     <script>
         Polymer({
@@ -33,7 +27,12 @@
             ],
 
             properties: {
-
+                users: {
+                    type: Array,
+                    value: function () {
+                        return [];
+                    }
+                },
             },
 
             /* Life cycle */
@@ -44,10 +43,16 @@
 
             attached() {
 
+                var database = firebase.database();
+                database.ref(`/users`).once(`value`).then((snapshot) => {
+                    const items = snapshot.val();
+                    this.users = Object.keys(items).map(key => items[key]);
+                });
+
+
             },
 
             detached() {
-
             },
 
             /* Functions */
