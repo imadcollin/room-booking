@@ -8,10 +8,39 @@
         <style>
             :host {
                 display: flex;
+                flex-wrap: wrap;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                width: 20%;
+                height: 5%;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                padding: 2px 16px;
             }
         </style>
 
-        Start[[users]]
+        <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+            <div class="Cards">
+
+            </div>
+
+            <div class="card">
+                <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b>[[user.firstname]] [[user.lastname]]</b></h4>
+                    <!--<p>[[user.email]]</p>-->
+                </div>
+            </div>
+
+        </template>
 
     </template>
     <script>
@@ -23,7 +52,7 @@
             is: `ape-style-guide`,
 
             behaviors: [
-
+                `_userImages(user.imageURL)`
             ],
 
             properties: {
@@ -33,6 +62,11 @@
                         return [];
                     }
                 },
+                userImage: {
+                    type: String,
+                    value: `fallback.png`//fallback image should be added
+                }
+
             },
 
             /* Life cycle */
@@ -55,7 +89,21 @@
             detached() {
             },
 
-            /* Functions */
+            _sort(a, b) {
+
+                if (a.firstname === b.firstname) return 0;
+                return a.firstname < b.firstname ? -1 : 1;
+            },
+            _userImages(userImage) {
+                if (this.user.imageURL === `` || this.user.imagURL == undefined) {
+                    this.user.imageURL == userImage;
+                }
+                else {
+                    return 0;
+                }
+
+            }
+
 
         });
     </script>
