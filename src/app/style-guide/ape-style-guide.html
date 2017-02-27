@@ -1,23 +1,29 @@
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
+<link rel="import" href="/src/config/config.html">
 
 <dom-module id="ape-style-guide">
 
     <template>
 
         <style>
-
             :host {
                 display: flex;
             }
-
         </style>
 
-        Style guide
+        Start
 
     </template>
-
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
     <script>
-
+        firebase.initializeApp(CONFIG.DataBaseConnector);
+        var database = firebase.database();
+        console.log(`Hello from js `, database.ref(`/users`));
+        database.ref(`/users`).on(`value`, function (data) {
+            console.log(`yes`, data.val());
+        });
+    </script>
+    <script>
         Polymer({
 
             is: `ape-style-guide`,
@@ -47,7 +53,6 @@
             /* Functions */
 
         });
-
     </script>
 
 </dom-module>
