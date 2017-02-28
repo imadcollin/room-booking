@@ -1,4 +1,5 @@
 <link rel="import" href="../../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../firebase/firebase.html">
 <link rel="import" href="../icon/ape-icon.html">
 
 <dom-module id="ape-weather">
@@ -20,7 +21,7 @@
                 /*background: linear-gradient(to bottom right, red, yellow);*/
             }
 
-            svg {
+            ape-icon {
                 height: 8.8rem;
                 width: 8.8rem;
                 margin-bottom: 1.6rem;
@@ -87,13 +88,13 @@
 
         </style>
 
-        <ape-icon name="[[weatherData.icon]]"></ape-icon>
         <div class="temperature-current">[[weatherData.temp.current]]°</div>
+        <ape-icon name="[[weatherData.icon]]"></ape-icon>
         <div class="location">[[weatherData.locationName]]</div>
         <div class="description">[[weatherData.description]]</div>
         <div class="wind">[[weatherData.wind.speed]] m/s</div>
 
-        <div id="loader" class="loader-container">
+        <div class="loader-container">
             <div class="loader"></div>
             <div>Laddar väder...</div>
         </div>
@@ -109,11 +110,11 @@
             properties: {
                 weatherData: {
                     type: Object,
-                    value: () => {}
+                    value: () => null
                 },
                 weatherRef: {
                     type: Object,
-                    value: () => {}
+                    value: () => null
                 },
             },
 
@@ -122,7 +123,7 @@
                 this.weatherRef = firebase.database().ref(`/weather`);
                 this.weatherRef.on(`value`, (data) => {
                     this.weatherData = data.val();
-                    requestAnimationFrame(() => this.removeChild(this.$.loader));
+                    this._removeLoaderIfExists();
                 });
             },
 
@@ -130,6 +131,17 @@
                 // remove weather reference from weather node
                 this.weatherRef.off();
             },
+
+            /**
+             * Removes loader from the widget if it still is in the DOM and has not previously been removed.
+             * The loader will be removed in the next animation frame.
+             */
+            _removeLoaderIfExists() {
+                const loader = this.querySelector(`.loader-container`);
+                if (loader) {
+                    requestAnimationFrame(() => this.removeChild(loader));
+                }
+            }
 
         });
 
