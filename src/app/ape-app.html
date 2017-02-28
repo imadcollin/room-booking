@@ -1,12 +1,9 @@
 <link rel="import" href="../config/config.html">
-<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
-<script>
-    firebase.initializeApp(CONFIG.DataBaseConnector);
-</script>
 <link rel="import" href="../assets/libs/polymer/polymer.html">
 <link rel="import" href="../assets/libs/app-route/app-route.html">
 <link rel="import" href="../assets/libs/app-route/app-location.html">
 
+<link rel="import" href="shared/firebase/firebase.html">
 <link rel="import" href="shared/pages/x-pages.html">
 
 <dom-module id="ape-app">
@@ -76,7 +73,7 @@
             /* Life cycle */
 
             ready() {
-
+                firebase.initializeApp(CONFIG.DataBaseConnector);
             },
 
             attached() {
@@ -94,12 +91,6 @@
                 const importHref = `${this.page}/ape-${this.page}.html`;
                 this.importHref(this.resolveUrl(importHref), null, null, true);
             },
-
-            /* Functions */
-
-            test() {
-                return `test`;
-            }
 
         });
 
