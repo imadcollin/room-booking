@@ -12,10 +12,30 @@
                 display: flex;
                 flex-direction: column;
                 background-color: #eaeaea;
-                /*box-shadow: 0px 0px 16px 0px #8e8e8e;*/
+                box-shadow: inset 0px 0px 16px 0px #8e8e8e;
+            }
+
+
+            #placeholder {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* States */
+
+            :host([state="drag-enter"]) {
+                box-shadow: none;
+                background-color: #fff;
             }
 
         </style>
+
+        <div id="placeholder">
+            [[placeholderMessage]]
+        </div>
 
     </template>
 
@@ -26,23 +46,41 @@
             is: `ape-container`,
 
             properties: {
+                state: {
+                    type: String,
+                    reflectToAttribute: true
+                },
                 widget: {
                     type: Object,
                     value: () => {}
+                },
+                placeholderMessage: {
+                    type: String,
+                    value: `Släpp din widget här`
                 }
             },
 
             attached() {
+                this.listen(this, `dragenter`, `_listenerDragEnter`);
                 this.listen(this, `dragover`, `_listenerDragOver`);
+                this.listen(this, `dragleave`, `_listenerDragLeave`);
                 this.listen(this, `drop`, `_listenerDrop`);
             },
 
             detached() {
+                this.unlisten(this, `dragenter`, `_listenerDragEnter`);
                 this.unlisten(this, `dragover`, `_listenerDragOver`);
+                this.unlisten(this, `dragleave`, `_listenerDragLeave`);
                 this.unlisten(this, `drop`, `_listenerDrop`);
             },
 
             /* Listeners */
+
+            _listenerDragEnter() {
+                if (!this.widget) {
+                    this.state = `drag-enter`;
+                }
+            },
 
             _listenerDragOver(event) {
                 if (!this.widget) {
@@ -50,12 +88,17 @@
                 }
             },
 
+            _listenerDragLeave() {
+                this.state = ``;
+            },
+
             _listenerDrop(event) {
                 event.preventDefault();
                 const widgetName = event.dataTransfer.getData(`widget-name`);
                 this.widget = document.createElement(widgetName);
                 requestAnimationFrame(() => {
-                    event.target.appendChild(this.widget);
+                    this.removeChild(this.$.placeholder);
+                    this.appendChild(this.widget);
                 });
             },
 
