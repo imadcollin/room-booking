@@ -6,20 +6,26 @@
     <template>
 
         <style>
-            :host {
-                display: flex;
+          :host {
+                padding: .5vw;
+                font-size: 0;
+                display: -ms-flexbox;
                 flex-wrap: wrap;
-                --card-shadow: 0 0.49rem 0.7rem 0rem rgba(0, 0, 0, 0.25);
-                --name-height: 1.6 rem;
-                --font-size-md: 1.6rem;
-                font-family: inherit;
+                flex-direction: column;
+                flex-flow: row wrap;
+                flex-flow: row wrap;
+                display: -webkit-box;
+                display: flex;
+                margin: 0;
+                background:darkgray;
             }
 
             .card {
-                box-shadow: var(--card-shadow);
-                transition: 0.3s;
-                width: 20%;
-                height: 5%;
+                box-flex: auto;
+                flex: auto;
+                flex: auto;
+                width: 200px;
+                margin: .5vw;
             }
 
             .card:hover {
@@ -28,9 +34,11 @@
 
             .container {
                 padding: 2px 16px;
-                height: var(--name-height);
-                font-size: var(--font-size-md);
-                box-sizing: border-box;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
             }
         </style>
 
