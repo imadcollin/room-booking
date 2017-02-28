@@ -69,10 +69,7 @@
                         return [];
                     }
                 },
-                userImage: {
-                    type: String,
-                    value: `fallback.png`//fallback image should be added
-                },
+
                 time: {
                     type: String,
                     value: function () {
@@ -125,15 +122,7 @@
                 if (a.firstname === b.firstname) return 0;
                 return a.firstname < b.firstname ? -1 : 1;
             },
-            _userImages(userImage) {
-                if (this.user.imageURL === `` || this.user.imagURL == undefined) {
-                    this.user.imageURL == userImage;
-                }
-                else {
-                    return 0;
-                }
 
-            },
 
 
         });
