@@ -1,0 +1,114 @@
+<link rel="import" href="../../assets/libs/polymer/polymer.html">
+<link rel="import" href="/src/config/config.html">
+
+<dom-module id="ape-employees">
+
+    <template>
+
+        <style>
+            :host {
+                padding: .5vw;
+                font-size: 0;
+                display: -ms-flexbox;
+                flex-wrap: wrap;
+                flex-direction: column;
+                flex-flow: row wrap;
+                flex-flow: row wrap;
+                display: -webkit-box;
+                display: flex;
+                margin: 0;
+                background: darkgray;
+            }
+
+            .card {
+                box-flex: auto;
+                flex: auto;
+                flex: auto;
+                width: 200px;
+                margin: .5vw;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                padding: 12px 16px;
+                font-size: large;
+                text-align: left;
+                background: #eee;
+                height: 3.4vw;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+
+        <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+            <div class="Cards">
+
+            </div>
+
+            <div class="card">
+                <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+                <div class="container">
+                    [[user.firstname]] [[user.lastname]]
+                    <!--<p>[[user.email]]</p>-->
+
+                </div>
+            </div>
+        </template>
+
+    </template>
+    <script>
+
+    </script>
+    <script>
+        Polymer({
+
+            is: `ape-employees`,
+
+            behaviors: [
+            ],
+
+            properties: {
+                users: {
+                    type: Array,
+                    value: function () {
+                        return [];
+                    }
+                },
+            },
+
+            /* Life cycle */
+
+            ready() {
+            },
+
+            attached() {
+
+                var database = firebase.database();
+                database.ref(`/users`).once(`value`).then((snapshot) => {
+                    const items = snapshot.val();
+                    this.users = Object.keys(items).map(key => items[key]);
+                });
+
+            },
+
+            detached() {
+            },
+
+            _sort(a, b) {
+
+                if (a.firstname === b.firstname) return 0;
+                return a.firstname < b.firstname ? -1 : 1;
+            },
+
+
+
+        });
+    </script>
+
+</dom-module>
