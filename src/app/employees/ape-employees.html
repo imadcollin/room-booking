@@ -1,5 +1,4 @@
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
-<link rel="import" href="/src/config/config.html">
 <link rel="import" href="./../shared/time/ape-time.html">
 
 <dom-module id="ape-employees">
@@ -27,27 +26,38 @@
             }
 
             .container {
-                padding: 12px 16px;
-                font-size: large;
                 text-align: left;
                 background: #eee;
-                height: 3.4vw;
+                height: 5.4vw;
                 font-size: inherit;
+                line-height: normal;
             }
 
             img {
                 width: 100%;
                 height: auto;
             }
+
+            .default::before {
+                content: ".";
+                color: green;
+                font-weight: bold;
+                line-height: 0px;
+                font-size: 7rem;
+            }
+
+            .red {
+                background: red;
+            }
         </style>
         <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
 
 
             <div class="card">
-                <!--<img src="[[user.imageURL]]" alt="Avatar" style="width:100%">-->
+                <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
                 <div class="container">
-                    <!--[[user.firstname]] [[user.lastname]]-->
-                    <p>[[isInOffice]] doSomthing</p>
+                    <span id="colorElement" class="default"> </span>[[user.firstname]] [[user.lastname]]
+                    <!--<p>[[isInOffice]] </p>-->
                     <!--<p>[[user.email]]</p>-->
 
                 </div>
@@ -121,8 +131,8 @@
                     if (userStatus === true) {
                         //do something
                     } else {
-                        //do the opposite
-                        this.isInOffice=`Set Color to red  `;
+                        document.getElementById(`colorElement`).classList.add(`red`);
+
                     }
                 }
             },
