@@ -44,9 +44,10 @@
 
 
             <div class="card">
-                <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+                <!--<img src="[[user.imageURL]]" alt="Avatar" style="width:100%">-->
                 <div class="container">
-                    [[user.firstname]] [[user.lastname]]
+                    <!--[[user.firstname]] [[user.lastname]]-->
+                    <p>[[isInOffice]] doSomthing</p>
                     <!--<p>[[user.email]]</p>-->
 
                 </div>
@@ -72,6 +73,18 @@
                         return [];
                     }
                 },
+                user: {
+                    type: Object,
+
+                },
+                isInOffice: {
+                    type: String,
+                },
+                isInMeeting: {
+                    type: String,
+
+                }
+
             },
 
             /* Life cycle */
@@ -85,6 +98,8 @@
                 database.ref(`/users`).once(`value`).then((snapshot) => {
                     const items = snapshot.val();
                     this.users = Object.keys(items).map(key => items[key]);
+                    this.checkStatus();
+                    this.InMeeting();
                 });
 
             },
@@ -97,6 +112,34 @@
                 if (a.firstname === b.firstname) return 0;
                 return a.firstname < b.firstname ? -1 : 1;
             },
+            checkStatus() {
+                let userStatus;
+                if (this.users !== null || this.users !== undefined) {
+                    userStatus = this.users.map(function (x) {
+                        return x.isInOffice;
+                    });
+                    if (userStatus === true) {
+                        //do something
+                    } else {
+                        //do the opposite
+                        this.isInOffice=`Set Color to red  `;
+                    }
+                }
+            },
+            InMeeting() {
+                let userStatus;
+                if (this.users !== null || this.users !== undefined) {
+                    userStatus = this.users.map(function (x) {
+                        return x.isInMeeting;
+                    });
+                    if (userStatus === true) {
+                        //do something
+                    } else {
+                        //do the opposite
+                    }
+                }
+            },
+
 
 
 
