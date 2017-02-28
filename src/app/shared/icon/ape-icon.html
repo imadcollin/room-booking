@@ -1,0 +1,57 @@
+<link rel="import" href="../../../assets/libs/polymer/polymer.html">
+
+<dom-module id="ape-icon">
+
+	<template>
+
+		<style>
+
+			:host {
+				position: relative;
+				display: block;
+			}
+
+			#svg {
+				position: inherit;
+				height: inherit;
+				width: inherit;
+                display: inherit;
+			}
+
+		</style>
+
+		<svg id="svg" xmlns="http://www.w3.org/2000/svg">
+			<use id="use"></use>
+		</svg>
+
+	</template>
+
+	<script>
+
+        Polymer({
+
+            is: 'ape-icon',
+
+            properties: {
+
+                name: {
+                    type: String,
+                    observer: '_nameChanged'
+                }
+
+            },
+
+            _nameChanged: function(name) {
+                /**
+                 * Need to inject the element in order for the data binding to work. ISSUE: https://github.com/Polymer/polymer/issues/3060
+                 * When fixed use: '<use xlink:href$="icons.svg#$[[name]]"></use>' inside the svg element
+                 */
+                this.$.use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '/assets/media/icons.svg#' + name)
+                // this.$.use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + name)
+            }
+
+        });
+
+    </script>
+
+</dom-module>
