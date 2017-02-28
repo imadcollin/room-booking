@@ -9,10 +9,14 @@
             :host {
                 display: flex;
                 flex-wrap: wrap;
+                --card-shadow: 0 0.49rem 0.7rem 0rem rgba(0, 0, 0, 0.25);
+                --name-height: 1.6 rem;
+                --font-size-md: 1.6rem;
+                font-family: inherit;
             }
 
             .card {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                box-shadow: var(--card-shadow);
                 transition: 0.3s;
                 width: 20%;
                 height: 5%;
@@ -24,6 +28,9 @@
 
             .container {
                 padding: 2px 16px;
+                height: var(--name-height);
+                font-size: var(--font-size-md);
+                box-sizing: border-box;
             }
         </style>
 
@@ -35,11 +42,11 @@
             <div class="card">
                 <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
                 <div class="container">
-                    <h4><b>[[user.firstname]] [[user.lastname]]</b></h4>
+                    [[user.firstname]] [[user.lastname]]
                     <!--<p>[[user.email]]</p>-->
+
                 </div>
             </div>
-
         </template>
 
     </template>
@@ -65,6 +72,31 @@
                 userImage: {
                     type: String,
                     value: `fallback.png`//fallback image should be added
+                },
+                time: {
+                    type: String,
+                    value: function () {
+                        function startTime() {
+                            var today = new Date();
+                            var h = today.getHours();
+                            var m = today.getMinutes();
+                            var s = today.getSeconds();
+                            m = checkTime(m);
+                            s = checkTime(s);
+
+
+                            var t = setTimeout(startTime, 500);
+                            console.log(h + ":" + m + ":" + s);
+                            return h + ":" + m + ":" + s;
+                        }
+                        function checkTime(i) {
+                            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+                            return i;
+                        }
+                        let t = startTime();
+                        return t;
+
+                    }
                 }
 
             },
@@ -72,7 +104,6 @@
             /* Life cycle */
 
             ready() {
-
             },
 
             attached() {
@@ -102,7 +133,7 @@
                     return 0;
                 }
 
-            }
+            },
 
 
         });
