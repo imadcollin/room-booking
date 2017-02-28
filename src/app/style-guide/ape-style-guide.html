@@ -6,7 +6,7 @@
     <template>
 
         <style>
-          :host {
+            :host {
                 padding: .5vw;
                 font-size: 0;
                 display: -ms-flexbox;
@@ -17,7 +17,7 @@
                 display: -webkit-box;
                 display: flex;
                 margin: 0;
-                background:darkgray;
+                background: darkgray;
             }
 
             .card {
@@ -33,7 +33,11 @@
             }
 
             .container {
-                padding: 2px 16px;
+                padding: 12px 16px;
+                font-size: large;
+                text-align: left;
+                background: #eee;
+                height: 3.4vw;
             }
 
             img {
@@ -91,7 +95,7 @@
 
 
                             var t = setTimeout(startTime, 500);
-                            console.log(h + ":" + m + ":" + s);
+                            // console.log(h + ":" + m + ":" + s);
                             return h + ":" + m + ":" + s;
                         }
                         function checkTime(i) {
