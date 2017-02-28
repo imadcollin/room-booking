@@ -123,20 +123,21 @@
                 this.weatherRef = firebase.database().ref(`/weather`);
                 this.weatherRef.on(`value`, (data) => {
                     this.weatherData = data.val();
-                    this._removeLoaderIfExists();
+                    this._removeLoader();
                 });
             },
 
             detached() {
                 // remove weather reference from weather node
-                this.weatherRef.off();
+                if (this.weatherRef) {
+                    this.weatherRef.off();
+                }
             },
 
             /**
-             * Removes loader from the widget if it still is in the DOM and has not previously been removed.
-             * The loader will be removed in the next animation frame.
+             * Removes loader from the widget if it still is in the DOM.
              */
-            _removeLoaderIfExists() {
+            _removeLoader() {
                 const loader = this.querySelector(`.loader-container`);
                 if (loader) {
                     requestAnimationFrame(() => this.removeChild(loader));

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Webcomponent test</title>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="ape-weather.html">
+
+</head>
+
+<body>
+
+    <test-fixture id="basic">
+        <template>
+            <ape-weather></ape-weather>
+        </template>
+    </test-fixture>
+
+    <script>
+
+        suite(`<ape-weather>`, () => {
+
+            let element;
+            setup(() => {
+                element = fixture(`basic`);
+            });
+
+            test(`has correct element name`, () => {
+                expect(element.is).to.be.equal(`ape-weather`);
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
