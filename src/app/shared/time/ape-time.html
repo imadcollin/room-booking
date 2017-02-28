@@ -1,63 +1,101 @@
-<link rel="import" href="../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../../../assets/libs/polymer/polymer.html">
 
 <dom-module id="ape-time">
 
     <template>
 
         <style>
+
             :host {
+                position: relative;
                 display: flex;
+                width: 100%;
+                height: 100%;
                 flex-direction: column;
                 padding: 1.6rem;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
             }
+
+            .time {
+                font-size: 7.6rem;
+                font-weight: 700;
+            }
+
         </style>
-        [[time]]
+
+        <div class="time">[[time]]</div>
+
     </template>
 
     <script>
+
         Polymer({
 
             is: `ape-time`,
 
-            behaviors: [
-
-            ],
-
             properties: {
                 time: {
                     type: String,
-
                 }
-
             },
 
-            /* Life cycle */
-
-            ready() {
-                this.startTime();
-            },
-
+            /**
+             * Attached
+             */
             attached() {
+                this._startClock();
             },
 
+            /**
+             * Detached
+             */
             detached() {
-
+                this._stopClock();
             },
 
-            startTime() {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
+            /**
+             * Start the clock
+             */
+            _startClock() {
+                // get the current date.
+                const today = new Date();
+                const hour = today.getHours();
+                const minutes = today.getMinutes();
+                const seconds = today.getSeconds();
 
-                if (m < 10) { m = `0` + m; }  // add zero in front of numbers < 10
-                if (s < 10) { s = `0` + s; }  // add zero in front of numbers < 10
+                // format the date if necessary
+                // TODO: can we use localized behaviour to format date instead?
+                const hourFormatted = this._addZeroIfSingleDigit(hour);
+                const minutesFormatted = this._addZeroIfSingleDigit(minutes);
+                const secondsFormatted = this._addZeroIfSingleDigit(seconds);
 
-                setTimeout(this.startTime.bind(this), 500);
-                this.time = h + `:` + m + `:` + s;
+                // set the formatted time
+                this.time =  `${hourFormatted}:${minutesFormatted}:${secondsFormatted}`;
+
+                // recursively call the function again
+                this._timeoutId = setTimeout(this._startClock.bind(this), 500);
             },
+
+            /**
+             * Stop the clock
+             */
+            _stopClock() {
+                clearTimeout(this._timeoutId);
+            },
+
+            /**
+             * Add a zero in front of the string if it is a single digit.
+             * Return formatted digit as string.
+             */
+            _addZeroIfSingleDigit(digit) {
+                const digitString = digit.toString();
+                return (digitString.length === 1) ? `0${digit}` : `${digit}`;
+            }
 
         });
+
     </script>
 
 </dom-module>
