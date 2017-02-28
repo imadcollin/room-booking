@@ -5,19 +5,16 @@
     <template>
 
         <style>
-
             :host {
                 display: flex;
                 flex-direction: column;
                 padding: 1.6rem;
             }
-
         </style>
-
+        [[time]]
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-time`,
@@ -27,27 +24,40 @@
             ],
 
             properties: {
+                time: {
+                    type: String,
+
+                }
 
             },
 
             /* Life cycle */
 
             ready() {
-
+                this.startTime();
             },
 
             attached() {
-
             },
 
             detached() {
 
             },
 
-            /* Functions */
+            startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+
+                if (m < 10) { m = `0` + m; }  // add zero in front of numbers < 10
+                if (s < 10) { s = `0` + s; }  // add zero in front of numbers < 10
+
+                setTimeout(this.startTime.bind(this), 500);
+                this.time = h + `:` + m + `:` + s;
+            },
 
         });
-
     </script>
 
 </dom-module>
