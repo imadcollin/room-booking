@@ -27,8 +27,8 @@
                 element = fixture(`basic`);
             });
 
-            test(`hello function`, () => {
-                expect(element.test()).to.be.equal(`test`);
+            test(`has correct component name`, () => {
+                expect(element.is).to.be.equal(`ape-app`);
             });
 
         });
