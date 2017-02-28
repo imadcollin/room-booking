@@ -1,5 +1,6 @@
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 <link rel="import" href="/src/config/config.html">
+<link rel="import" href="./../shared/time/ape-time.html">
 
 <dom-module id="ape-employees">
 
@@ -8,22 +9,15 @@
         <style>
             :host {
                 padding: .5vw;
-                font-size: 0;
-                display: -ms-flexbox;
                 flex-wrap: wrap;
                 flex-direction: column;
                 flex-flow: row wrap;
-                flex-flow: row wrap;
-                display: -webkit-box;
                 display: flex;
                 margin: 0;
-                background: darkgray;
+                background: white;
             }
 
             .card {
-                box-flex: auto;
-                flex: auto;
-                flex: auto;
                 width: 200px;
                 margin: .5vw;
             }
@@ -38,6 +32,7 @@
                 text-align: left;
                 background: #eee;
                 height: 3.4vw;
+                font-size: inherit;
             }
 
             img {
@@ -45,11 +40,8 @@
                 height: auto;
             }
         </style>
-
         <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
-            <div class="Cards">
 
-            </div>
 
             <div class="card">
                 <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
