@@ -1,0 +1,84 @@
+<link rel="import" href="../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../shared/container/ape-container.html">
+
+<dom-module id="ape-style">
+
+    <template>
+
+        <style>
+
+            :host {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                padding: 1.6rem;
+            }
+
+            h2 {
+                margin: 0;
+                margin-bottom: 1.6rem;
+                padding-bottom: 0.8rem;
+                border-bottom: 2px solid #000;
+                align-self: flex-start;
+            }
+
+            .icon-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .icon-container ape-icon {
+                display: block;
+                width: 4.2rem;
+                height: 4.2rem;
+                margin: 1.6rem;
+                fill: red;
+            }
+
+        </style>
+
+        <h2>Icons</h2>
+        <div class="icon-container">
+            <ape-icon name="01d"></ape-icon>
+            <ape-icon name="01n"></ape-icon>
+            <ape-icon name="02d"></ape-icon>
+            <ape-icon name="02n"></ape-icon>
+            <ape-icon name="03d"></ape-icon>
+            <ape-icon name="03n"></ape-icon>
+            <ape-icon name="04d"></ape-icon>
+            <ape-icon name="04n"></ape-icon>
+            <ape-icon name="09d"></ape-icon>
+            <ape-icon name="09n"></ape-icon>
+            <ape-icon name="10d"></ape-icon>
+            <ape-icon name="10n"></ape-icon>
+            <ape-icon name="11d"></ape-icon>
+            <ape-icon name="11n"></ape-icon>
+        </div>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `ape-style`,
+
+            behaviors: [
+
+            ],
+
+            properties: {
+
+            },
+
+            /* Life cycle */
+
+            ready() {
+
+            },
+
+        });
+
+    </script>
+
+</dom-module>
