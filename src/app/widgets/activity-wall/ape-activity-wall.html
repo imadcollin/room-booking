@@ -1,0 +1,153 @@
+<link rel="import" href="../../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../../shared/firebase/firebase.html">
+
+<dom-module id="ape-activity-wall">
+
+    <template>
+
+        <style>
+
+            :host {
+                padding: .5vw;
+                flex-direction: column;
+                flex-flow: row wrap;
+                display: flex;
+                margin: 0;
+                background: white;
+            }
+
+            .card {
+                width: 200px;
+                margin: .5vw;
+            }
+
+            /*The employee not at office*/
+
+            .card[in-meeting] {
+                opacity: 0.5;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                text-align: left;
+                background: #eee;
+                height: 3.4vw;
+                font-size: inherit;
+                line-height: normal;
+            }
+
+            .status-text::before {
+                content: ".";
+                color: green;
+                font-weight: bold;
+                line-height: 0px;
+                font-size: 7rem;
+            }
+
+            /*The employee at the meeting */
+
+            .status-text[in-office]::before {
+                color: red;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            .message-relative {
+                position: relative;
+                /*width: 100%;*/
+                /*height: 0;*/
+            }
+
+            .employee_mesage {
+                position: absolute;
+                top: 17rem;
+                right: 0rem;
+                font-size: 2.5rem;
+                background: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) 35%, rgba(0, 0, 0, 0.7));
+            }
+
+        </style>
+
+        <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+            <div class="card" in-meeting$="[[!user.isInMeeting]]">
+                <div class="message-relative">
+                    <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+                    <div class="employee_mesage">
+                        <span>Birthday</span>
+                    </div>
+                </div>
+                <div class="container">
+                    <span class="status-text" in-office$="[[user.isInOffice]]"></span >[[user.firstname]] [[user.lastname]]
+                </div>
+            </div>
+        </template>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `ape-activity-wall`,
+
+            behaviors: [
+
+            ],
+
+            properties: {
+                users: {
+                    type: Array,
+                    value: () => []
+                },
+                user: {
+                    type: Object,
+
+                },
+                isInOffice: {
+                    type: String,
+                },
+                isInMeeting: {
+                    type: String,
+
+                },
+                color: {
+                    type: String,
+                    value: `red`
+                }
+            },
+
+            /* Life cycle */
+
+            ready() {
+
+            },
+
+            attached() {
+                var database = firebase.database();
+                database.ref(`/users`).once(`value`).then((snapshot) => {
+                    const items = snapshot.val();
+                    this.users = Object.keys(items).map(key => items[key]);
+
+                });
+            },
+
+            detached() {
+
+            },
+
+            _sort(a, b) {
+                if (a.firstname === b.firstname) return 0;
+                return a.firstname < b.firstname ? -1 : 1;
+            },
+
+        });
+
+    </script>
+
+</dom-module>
