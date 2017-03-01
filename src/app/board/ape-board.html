@@ -99,6 +99,18 @@
                 display: none;
             }
 
+            /* Layout 4 */
+
+            :host([layout-4]) .container-wrapper {
+                grid-template-areas: "one one one"
+                                     "one one one"
+                                     "one one one"
+            }
+
+            :host([layout-4]) ape-container:nth-child(n+2) {
+                display: none;
+            }
+
             .menu {
                 position: fixed;
                 right: 0;
@@ -124,14 +136,13 @@
         </style>
 
         <div class="menu">
-            <div class="menu-icon" draggable="true" on-dragstart="_dragStart" id="ape-weather">Weather</div>
-            <div class="menu-icon" draggable="true" on-dragstart="_dragStart" id="ape-time">Time</div>
-            <div class="menu-icon" draggable="true" on-dragstart="_dragStart" id="ape-twitter">Twitter</div>
-            <div class="menu-icon" draggable="true" on-dragstart="_dragStart" id="ape-wall">Wall</div>
+            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-weather" >Weather</div>
+            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-time">Time</div>
+            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-twitter">Twitter</div>
+            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="3" data-min-height="3" data-name="ape-wall">Wall</div>
         </div>
 
         <div class="container-wrapper">
-
             <ape-container></ape-container>
             <ape-container></ape-container>
             <ape-container></ape-container>
@@ -141,7 +152,6 @@
             <ape-container></ape-container>
             <ape-container></ape-container>
             <ape-container></ape-container>
-
         </div>
 
     </template>
@@ -168,8 +178,12 @@
 
             /* Listeners */
 
-            _dragStart(event) {
-                event.dataTransfer.setData(`widget-name`, event.target.id);
+            _listenerDragStart(event) {
+                const dataset = event.target.dataset;
+                const name = dataset.name;
+                // const minWidth = dataset.minWidth;
+                // const minHeight = dataset.minHeight;
+                event.dataTransfer.setData(`widget-name`, name);
             }
 
         });

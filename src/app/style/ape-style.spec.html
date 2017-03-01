@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>Webcomponent test</title>
     <script src="../../web-component-tester/browser.js"></script>
-    <link rel="import" href="ape-app.html">
+    <link rel="import" href="ape-style.html">
 
 </head>
 
@@ -14,13 +14,13 @@
 
     <test-fixture id="basic">
         <template>
-            <ape-app></ape-app>
+            <ape-style></ape-style>
         </template>
     </test-fixture>
 
     <script>
 
-        suite(`<ape-app>`, () => {
+        suite(`<ape-style>`, () => {
 
             let element;
             setup(() => {
@@ -28,7 +28,7 @@
             });
 
             test(`has correct component name`, () => {
-                expect(element.is).to.be.equal(`ape-app`);
+                expect(element.is).to.be.equal(`ape-style`);
             });
 
         });
