@@ -65,49 +65,49 @@
 
             /* Layout 1 */
 
-            :host([layout-1]) .container-wrapper {
+            :host([layout="1"]) .container-wrapper {
                 grid-template-areas: "one two three"
                                      "one two three"
                                      "one two three"
             }
 
-            :host([layout-1]) ape-container:nth-child(n+4) {
+            :host([layout="1"]) ape-container:nth-child(n+4) {
                 display: none;
             }
 
             /* Layout 2 */
 
-            :host([layout-2]) .container-wrapper {
+            :host([layout="2"]) .container-wrapper {
                 grid-template-areas: "one one one"
                                      "two two two"
                                      "three three three"
             }
 
-            :host([layout-2]) ape-container:nth-child(n+4) {
+            :host([layout="2"]) ape-container:nth-child(n+4) {
                 display: none;
             }
 
             /* Layout 3 */
 
-            :host([layout-3]) .container-wrapper {
+            :host([layout="3"]) .container-wrapper {
                 grid-template-areas: "one one one"
                                      "one one one"
                                      "two three four"
             }
 
-            :host([layout-3]) ape-container:nth-child(n+5) {
+            :host([layout="3"]) ape-container:nth-child(n+5) {
                 display: none;
             }
 
             /* Layout 4 */
 
-            :host([layout-4]) .container-wrapper {
+            :host([layout="4"]) .container-wrapper {
                 grid-template-areas: "one one one"
                                      "one one one"
                                      "one one one"
             }
 
-            :host([layout-4]) ape-container:nth-child(n+2) {
+            :host([layout="4"]) ape-container:nth-child(n+2) {
                 display: none;
             }
 
@@ -136,10 +136,16 @@
         </style>
 
         <div class="menu">
-            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-weather" >Weather</div>
+            <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-weather">Weather</div>
             <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-time">Time</div>
             <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="1" data-min-height="1" data-name="ape-twitter">Twitter</div>
             <div class="menu-icon" draggable="true" on-dragstart="_listenerDragStart" data-min-width="3" data-min-height="3" data-name="ape-wall">Wall</div>
+
+            <div class="menu-icon" on-tap="_listenerTapChangeLayout" data-layout="0">Layout</div>
+            <div class="menu-icon" on-tap="_listenerTapChangeLayout" data-layout="1">Layout1</div>
+            <div class="menu-icon" on-tap="_listenerTapChangeLayout" data-layout="2">Layout2</div>
+            <div class="menu-icon" on-tap="_listenerTapChangeLayout" data-layout="3">Layout3</div>
+            <div class="menu-icon" on-tap="_listenerTapChangeLayout" data-layout="4">Layout4</div>
         </div>
 
         <div class="container-wrapper">
@@ -167,7 +173,10 @@
             ],
 
             properties: {
-
+                layout: {
+                    type: String,
+                    reflectToAttribute: true
+                }
             },
 
             /* Life cycle */
@@ -176,14 +185,16 @@
 
             },
 
-            /* Listeners */
-
             _listenerDragStart(event) {
                 const dataset = event.target.dataset;
                 const name = dataset.name;
                 // const minWidth = dataset.minWidth;
                 // const minHeight = dataset.minHeight;
                 event.dataTransfer.setData(`widget-name`, name);
+            },
+
+            _listenerTapChangeLayout(event) {
+                this.layout = event.target.dataset.layout;
             }
 
         });
