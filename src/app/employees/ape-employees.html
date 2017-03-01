@@ -8,7 +8,6 @@
         <style>
             :host {
                 padding: .5vw;
-                /*flex-wrap: wrap;*/
                 flex-direction: column;
                 flex-flow: row wrap;
                 display: flex;
@@ -21,9 +20,9 @@
                 margin: .5vw;
             }
             /*The employee not at office*/
+
             .card[in-meeting] {
                 opacity: 0.5;
-
             }
 
             .card:hover {
@@ -33,7 +32,7 @@
             .container {
                 text-align: left;
                 background: #eee;
-                height: 5.4vw;
+                height: 3.4vw;
                 font-size: inherit;
                 line-height: normal;
             }
@@ -46,6 +45,7 @@
                 font-size: 7rem;
             }
             /*The employee at the meeting */
+
             .status-text[in-office]::before {
                 color: red;
             }
@@ -55,17 +55,33 @@
                 height: auto;
             }
 
+            .message-relative {
+                position: relative;
+                /*width: 100%;*/
+                /*height: 0;*/
+            }
+
+            .employee_mesage {
+                position: absolute;
+                top: 17rem;
+                right: 0rem;
+                font-size: 2.5rem;
+                background: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) 35%, rgba(0, 0, 0, 0.7));
+            }
         </style>
 
         <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
 
 
-            <div class="card" in-meeting$="[[user.isInMeeting]]">
-                <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+            <div class="card" in-meeting$="[[!user.isInMeeting]]">
+                <div class="message-relative">
+                    <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
+                    <div class="employee_mesage">
+                        <span>Birthday</span>
+                    </div>
+                </div>
                 <div class="container">
                     <span class="status-text" in-office$="[[user.isInOffice]]"></span >[[user.firstname]] [[user.lastname]]
-                    <!--<p>[[isInOffice]] </p>-->
-                    <!--<p>[[user.email]]</p>-->
 
                 </div>
             </div>
