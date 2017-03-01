@@ -8,7 +8,7 @@
         <style>
             :host {
                 padding: .5vw;
-                flex-wrap: wrap;
+                /*flex-wrap: wrap;*/
                 flex-direction: column;
                 flex-flow: row wrap;
                 display: flex;
@@ -19,6 +19,11 @@
             .card {
                 width: 200px;
                 margin: .5vw;
+            }
+            /*The employee not at office*/
+            .card[in-meeting] {
+                opacity: 0.5;
+
             }
 
             .card:hover {
@@ -33,30 +38,32 @@
                 line-height: normal;
             }
 
-            img {
-                width: 100%;
-                height: auto;
-            }
-
-            .default::before {
+            .status-text::before {
                 content: ".";
                 color: green;
                 font-weight: bold;
                 line-height: 0px;
                 font-size: 7rem;
             }
-
-            .red {
-                background: red;
+            /*The employee at the meeting */
+            .status-text[in-office]::before {
+                color: red;
             }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
         </style>
+
         <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
 
 
-            <div class="card">
+            <div class="card" in-meeting$="[[user.isInMeeting]]">
                 <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
                 <div class="container">
-                    <span id="colorElement" class="default"> </span>[[user.firstname]] [[user.lastname]]
+                    <span class="status-text" in-office$="[[user.isInOffice]]"></span >[[user.firstname]] [[user.lastname]]
                     <!--<p>[[isInOffice]] </p>-->
                     <!--<p>[[user.email]]</p>-->
 
@@ -93,6 +100,10 @@
                 isInMeeting: {
                     type: String,
 
+                },
+                color: {
+                    type: String,
+                    value: `red`
                 }
 
             },
@@ -108,8 +119,7 @@
                 database.ref(`/users`).once(`value`).then((snapshot) => {
                     const items = snapshot.val();
                     this.users = Object.keys(items).map(key => items[key]);
-                    this.checkStatus();
-                    this.InMeeting();
+
                 });
 
             },
@@ -122,36 +132,6 @@
                 if (a.firstname === b.firstname) return 0;
                 return a.firstname < b.firstname ? -1 : 1;
             },
-            checkStatus() {
-                let userStatus;
-                if (this.users !== null || this.users !== undefined) {
-                    userStatus = this.users.map(function (x) {
-                        return x.isInOffice;
-                    });
-                    if (userStatus === true) {
-                        //do something
-                    } else {
-                        document.getElementById(`colorElement`).classList.add(`red`);
-
-                    }
-                }
-            },
-            InMeeting() {
-                let userStatus;
-                if (this.users !== null || this.users !== undefined) {
-                    userStatus = this.users.map(function (x) {
-                        return x.isInMeeting;
-                    });
-                    if (userStatus === true) {
-                        //do something
-                    } else {
-                        //do the opposite
-                    }
-                }
-            },
-
-
-
 
         });
     </script>
