@@ -8,7 +8,6 @@
         <style>
 
             :host {
-                padding: .5vw;
                 flex-direction: column;
                 flex-flow: row wrap;
                 display: flex;
@@ -64,7 +63,7 @@
                 /*height: 0;*/
             }
 
-            .employee_mesage {
+            .employee-mesage {
                 position: absolute;
                 top: 17rem;
                 right: 0rem;
@@ -74,16 +73,17 @@
 
         </style>
 
-        <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+        <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
             <div class="card" in-meeting$="[[!user.isInMeeting]]">
                 <div class="message-relative">
-                    <img src="[[user.imageURL]]" alt="Avatar" style="width:100%">
-                    <div class="employee_mesage">
+                    <img src="[[user.imageURL]]" alt="Avatar">
+                    <div class="employee-mesage">
                         <span>Birthday</span>
                     </div>
                 </div>
                 <div class="container">
-                    <span class="status-text" in-office$="[[user.isInOffice]]"></span >[[user.firstname]] [[user.lastname]]
+                    <span class="status-text" in-office$="[[user.isInOffice]]"></span>
+                    [[user.firstname]] [[user.lastname]]
                 </div>
             </div>
         </template>
@@ -101,24 +101,14 @@
             ],
 
             properties: {
-                users: {
+                usersData: {
                     type: Array,
                     value: () => []
                 },
-                user: {
+                usersRef: {
                     type: Object,
+                    value: () => null
 
-                },
-                isInOffice: {
-                    type: String,
-                },
-                isInMeeting: {
-                    type: String,
-
-                },
-                color: {
-                    type: String,
-                    value: `red`
                 }
             },
 
@@ -129,11 +119,10 @@
             },
 
             attached() {
-                var database = firebase.database();
-                database.ref(`/users`).once(`value`).then((snapshot) => {
-                    const items = snapshot.val();
-                    this.users = Object.keys(items).map(key => items[key]);
-
+                this.usersRef = firebase.database().ref(`/users`);
+                this.usersRef.on(`value`, (data) => {
+                    const items = data.val();
+                    this.usersData = Object.keys(items).map(key => items[key]);
                 });
             },
 
