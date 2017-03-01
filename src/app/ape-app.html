@@ -2,6 +2,7 @@
 <link rel="import" href="../assets/libs/polymer/polymer.html">
 <link rel="import" href="../assets/libs/app-route/app-route.html">
 <link rel="import" href="../assets/libs/app-route/app-location.html">
+<link rel="import" href="../assets/libs/iron-pages/iron-pages.html">
 
 <link rel="import" href="shared/firebase/firebase.html">
 <link rel="import" href="shared/pages/x-pages.html">
@@ -27,7 +28,7 @@
                 color: #fff;
             }
 
-            x-pages {
+            iron-pages {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
@@ -38,12 +39,12 @@
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{router}}"></app-route>
 
-        <x-pages selected="[[page]]">
-            <ape-home pattern="^home$"></ape-home>
-            <ape-board pattern="^board$" layout-3></ape-board>
-            <ape-employees pattern="^employees$"></ape-employees>
-            <ape-style pattern="^style$"></ape-style>
-        </x-pages>
+        <iron-pages selected="[[page]]" attr-for-selected="selected" selected-attribute="visible" fallback-selection="404" on-iron-select="_listenerIronSelect">
+            <ape-home selected="home"></ape-home>
+            <ape-board selected="board" layout-3></ape-board>
+            <ape-employees selected="employees"></ape-employees>
+            <ape-style selected="style"></ape-style>
+        </iron-pages>
 
     </template>
 
@@ -67,7 +68,7 @@
             },
 
             observers: [
-                `_observeRouterPage(router.page)`
+                `_observerRouterPage(router.page)`
             ],
 
             /* Life cycle */
@@ -86,11 +87,17 @@
 
             /* Observers */
 
-            _observeRouterPage(page) {
-                this.page = (page) ? page : `home`;
-                const importHref = `${this.page}/ape-${this.page}.html`;
-                this.importHref(this.resolveUrl(importHref), null, null, true);
+            _observerRouterPage(page) {
+                this.page = (page === ``) ? `home` : page;
             },
+
+            /* Listeners */
+
+            _listenerIronSelect() {
+                const name = event.target.selected;
+                const importHref = `${this.page}/ape-${name}.html`;
+                this.importHref(this.resolveUrl(importHref), null, null, true);
+            }
 
         });
 
