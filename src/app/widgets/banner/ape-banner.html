@@ -5,20 +5,79 @@
     <template>
 
         <style>
-
             :host {
                 display: flex;
                 flex-direction: column;
                 padding: 1.6rem;
             }
 
+            .first {
+                animation: bannermove 60s linear infinite;
+            }
+
+            @keyframes bannermove {
+                0% {
+                    margin-left: 0px;
+                }
+                100% {
+                    margin-left: -18000px;
+                }
+            }
+
+            @-o-keyframes bannermove {
+                0% {
+                    margin-left: 0px;
+                }
+                100% {
+                    margin-left: -18000px;
+                }
+            }
+
+            .photobanner {
+                height: 56px;
+                width: 10000px;
+                margin-top: 30px;
+            }
+
+            .photobanner img {
+                height: 156px;
+                -webkit-transition: all 0.5s ease;
+                -moz-transition: all 0.5s ease;
+                -o-transition: all 0.5s ease;
+                -ms-transition: all 0.5s ease;
+                transition: all 0.5s ease;
+            }
+
+            .paused {
+                animation-play-state: paused;
+            }
+
+            .container1 {
+                width: 1000px;
+                height: 250px;
+                overflow: hidden;
+                margin: 0px auto;
+            }
         </style>
 
+        <div id="container">
+            <header>
+                <h1>SomeText </h1>
+                <p>SomeText</p>
+            </header>
+
+            <div class="photobanner">
+
+                <img class="first" src="image-1.jpg" alt="">
+                <img src="image-2.jpg" alt="">
+                <img src="image-3.jpg" alt="">
+
+            </div>
+        </div>
 
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-banner`,
@@ -48,7 +107,6 @@
             /* Functions */
 
         });
-
     </script>
 
 </dom-module>
