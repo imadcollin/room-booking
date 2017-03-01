@@ -99,6 +99,18 @@
                 display: none;
             }
 
+            /* Layout 4 */
+
+            :host([layout-4]) .container-wrapper {
+                grid-template-areas: "one one one"
+                                     "one one one"
+                                     "one one one"
+            }
+
+            :host([layout-4]) ape-container:nth-child(n+2) {
+                display: none;
+            }
+
             .menu {
                 position: fixed;
                 right: 0;
