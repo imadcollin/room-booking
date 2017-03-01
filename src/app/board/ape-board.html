@@ -8,20 +8,24 @@
         <style>
 
             :host {
-                display: flex;
-                flex-direction: column;
-                flex-grow: 1;
-                padding: 1.6rem;
-                background-color: #2a2a2a;
+                display: block;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                /*background-color: #2a2a2a;*/
+                /*padding: 1.6rem;*/
             }
 
             .container-wrapper {
-                flex-grow: 1;
+                height: 100%;
+                width: 100%;
                 display: grid;
-                grid-column-gap: 1.6rem;
-                grid-row-gap: 1.6rem;
                 grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(3, auto);
+                grid-template-rows: repeat(3, 33.3333%);
                 grid-template-areas: "one two three"
                                      "four five six"
                                      "seven eight nine"
