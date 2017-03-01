@@ -8,85 +8,82 @@
         <style>
 
             :host {
-                flex-direction: column;
-                flex-flow: row wrap;
                 display: flex;
-                margin: 0;
-                background: white;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            .card-container {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
             }
 
             .card {
-                width: 200px;
-                margin: .5vw;
+                display: block;
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: 10%;
+                overflow: hidden;
+                padding: 0.8rem;
             }
 
-            /*The employee not at office*/
+            .profile-img {
+                width: 100%;
+                object-fit: cover;
+            }
 
-            .card[in-meeting] {
+            profile-img:after {
+                content: "";
+                display: block;
+                padding-bottom: 100%;
+            }
+
+            .text-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .status {
+                display: none;
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: .8rem;
+                height: .8rem;
+                border-radius: 50%;
+                background-color: #2a2a2a;
+            }
+
+            .name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 0 .4rem;
+            }
+
+            .card[out-of-office] {
                 opacity: 0.5;
             }
 
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            }
-
-            .container {
-                text-align: left;
-                background: #eee;
-                height: 3.4vw;
-                font-size: inherit;
-                line-height: normal;
-            }
-
-            .status-text::before {
-                content: ".";
-                color: green;
-                font-weight: bold;
-                line-height: 0px;
-                font-size: 7rem;
-            }
-
-            /*The employee at the meeting */
-
-            .status-text[in-office]::before {
-                color: red;
-            }
-
-            img {
-                width: 100%;
-                height: auto;
-            }
-
-            .message-relative {
-                position: relative;
-                /*width: 100%;*/
-                /*height: 0;*/
-            }
-
-            .employee-mesage {
-                position: absolute;
-                top: 17rem;
-                right: 0rem;
-                font-size: 2.5rem;
-                background: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) 35%, rgba(0, 0, 0, 0.7));
+            .status[meeting] {
+                display: block;
             }
 
         </style>
 
-        <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
-            <div class="card" in-meeting$="[[!user.isInMeeting]]">
-                <div class="message-relative">
-                    <img src="[[user.imageURL]]" alt="Avatar">
-                    <div class="employee-mesage">
-                        <span>Birthday</span>
+        <div class="card-container">
+            <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
+                <div class="card" out-of-office$="[[!user.isInOffice]]">
+                    <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                    <div class="text-container">
+                        <div class="status" meeting$="[[user.isInMeeting]]"></div>
+                        <div class="name">[[user.firstname]] [[user.lastname]]</div>
                     </div>
                 </div>
-                <div class="container">
-                    <span class="status-text" in-office$="[[user.isInOffice]]"></span>
-                    [[user.firstname]] [[user.lastname]]
-                </div>
-            </div>
-        </template>
+            </template>
+        </div>
 
     </template>
 
