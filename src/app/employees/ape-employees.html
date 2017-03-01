@@ -7,6 +7,7 @@
     <template>
 
         <style>
+
             :host {
                 padding: .5vw;
                 flex-direction: column;
@@ -15,6 +16,7 @@
                 margin: 0;
                 background: white;
             }
+
         </style>
 
         <ape-activity-wall></ape-activity-wall>
@@ -22,6 +24,7 @@
     </template>
 
     <script>
+
         Polymer({
 
             is: `ape-employees`,
@@ -31,27 +34,6 @@
             ],
 
             properties: {
-                users: {
-                    type: Array,
-                    value: function () {
-                        return [];
-                    }
-                },
-                user: {
-                    type: Object,
-
-                },
-                isInOffice: {
-                    type: String,
-                },
-                isInMeeting: {
-                    type: String,
-
-                },
-                color: {
-                    type: String,
-                    value: `red`
-                }
 
             },
 
@@ -62,24 +44,15 @@
             },
 
             attached() {
-                var database = firebase.database();
-                database.ref(`/users`).once(`value`).then((snapshot) => {
-                    const items = snapshot.val();
-                    this.users = Object.keys(items).map(key => items[key]);
 
-                });
             },
 
             detached() {
 
             },
 
-            _sort(a, b) {
-                if (a.firstname === b.firstname) return 0;
-                return a.firstname < b.firstname ? -1 : 1;
-            },
-
         });
+
     </script>
 
 </dom-module>
