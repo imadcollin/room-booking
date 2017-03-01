@@ -15,7 +15,7 @@
     "postversion": "git push && git push --tags",
     "start": "node --require babel-register ./",
     "test": "npm run test:client",
-    "test:client": "wct --local=chrome ./src/app/**/*.spec.html",
+    "test:client": "wct --local=chrome './src/**/*.spec.html' -p",
     "test:server": "mocha --compilers js:babel-register ./server/**/*.spec.js"
   },
   "dependencies": {
