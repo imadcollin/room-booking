@@ -1,0 +1,174 @@
+<link rel="import" href="../../assets/libs/polymer/polymer.html">
+
+<dom-module id="ape-wall">
+
+    <template>
+
+        <style>
+
+           :host {
+                position: relative;
+                display: grid;
+                height: 100%;
+                width: 100%;
+                grid-template-columns: repeat(7, minmax(146.28px, 1fr));
+                grid-template-rows: repeat(5, minmax(146.28px, 20.0%));
+            }
+
+            .card {
+                position: relative;
+                padding: .8rem;
+            }
+
+            .profile-img {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                max-width: 100%;
+                object-fit: cover;
+            }
+
+            .text-container {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: .8rem;
+                background-color: #fff;
+            }
+
+            .status {
+                display: block;
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: .8rem;
+                height: .8rem;
+                margin-right: .4rem;
+                border-radius: 50%;
+                background-color: var(--primary-color);
+            }
+
+            .name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 1.6rem;
+            }
+
+            [hidden] {
+                display: none;
+            }
+
+            .loader-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader {
+                display: block;
+                width: 6rem;
+                height: 6rem;
+                background-color: var(--primary-color);
+                animation: animation-spinner 1.2s infinite ease-in-out;
+                margin-bottom: 1.6rem;
+            }
+
+            @keyframes animation-spinner {
+                0% {
+                    transform: perspective(12rem) rotateX(0deg) rotateY(0deg);
+                }
+                50% {
+                    transform: perspective(12rem) rotateX(-180.1deg) rotateY(0deg);
+                }
+                100% {
+                    transform: perspective(12rem) rotateX(-180deg) rotateY(-179.9deg);
+                }
+            }
+
+        </style>
+
+        <template is="dom-repeat" items="[[usersData]]" as="user">
+            <div class="card" out-of-office$="[[!user.isInOffice]]">
+                <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                <div class="text-container">
+                    <div class="status" hidden$="[[!user.isInMeeting]]"></div>
+                    <div class="name">[[user.firstname]] [[user.lastname]]</div>
+                </div>
+            </div>
+        </template>
+
+        <div class="loader-container">
+            <div class="loader"></div>
+            <div>Laddar väggen...</div>
+        </div>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: `ape-wall`,
+
+            behaviors: [
+
+            ],
+
+            properties: {
+                usersData: {
+                    type: Array,
+                    value: () => []
+                },
+                usersRef: {
+                    type: Object,
+                    value: () => null
+                }
+            },
+
+            /* Life cycle */
+
+            ready() {
+
+            },
+
+            attached() {
+                this.usersRef = firebase.database().ref(`/users`).limitToFirst(35);
+                this.usersRef.on(`value`, (data) => {
+                    const items = data.val();
+                    this.usersData = Object.keys(items).map(key => items[key]);
+                    this._removeLoader();
+                });
+            },
+
+            detached() {
+                // remove weather reference from weather node
+                if (this.usersRef) {
+                    this.usersRef.off();
+                }
+            },
+
+            /**
+             * Removes loader from the widget if it still is in the DOM.
+             */
+            _removeLoader() {
+                const loader = this.querySelector(`.loader-container`);
+                if (loader) {
+                    requestAnimationFrame(() => this.removeChild(loader));
+                }
+            },
+
+        });
+
+    </script>
+
+</dom-module>
