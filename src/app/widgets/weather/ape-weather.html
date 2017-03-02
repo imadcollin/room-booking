@@ -21,6 +21,10 @@
                 /*background-image: url("http://cdn.wallpapersafari.com/52/36/CiQ9qR.jpg");*/
             }
 
+            .icon-container {
+                position: relative;
+            }
+
             ape-icon {
                 height: 14.8rem;
                 width: 14.8rem;
@@ -42,20 +46,18 @@
 
             .temperature-current {
                 position: absolute;
-                left: 0;
+                left: calc(100% + 3.2rem);
                 top: 0;
-                font-size: 4.8rem;
+                font-size: 5.4rem;
                 font-weight: 700;
-                padding: 1.6rem;
             }
 
             .wind {
                 position: absolute;
-                right: 0;
+                left: calc(100% + 1.6rem);
                 top: 0;
                 font-size: 4.8rem;
                 font-weight: 700;
-                padding: 1.6rem;
             }
 
             .loader-container {
@@ -93,11 +95,13 @@
             }
         </style>
 
-        <div class="temperature-current">[[_formatNumber(weatherData.temp.current, 0)]]°</div>
-        <ape-icon name="[[weatherData.icon]]"></ape-icon>
+        <div class="icon-container">
+            <div class="temperature-current">[[_formatNumber(weatherData.temp.current, 0)]]°</div>
+            <ape-icon name="[[weatherData.icon]]"></ape-icon>
+            <!--<div class="wind">[[_formatNumber(weatherData.wind.speed, 0)]]m/s</div>-->
+        </div>
         <div class="location">[[weatherData.locationName]]</div>
         <div class="description">[[weatherData.description]]</div>
-        <div class="wind">[[_formatNumber(weatherData.wind.speed, 0)]] m/s</div>
 
         <div class="loader-container">
             <div class="loader"></div>
