@@ -1,6 +1,7 @@
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 <link rel="import" href="../widgets/activity-wall/ape-activity-wall.html">
-<link rel="import" href="../widgets/banner/ape-banner.html">
+<link rel="import" href="../widgets/time/ape-time.html">
+<link rel="import" href="../widgets/weather/ape-weather.html">
 
 <dom-module id="ape-employees">
 
@@ -8,18 +9,65 @@
 
         <style>
 
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
             :host {
                 padding: 1.6rem;
-                flex-direction: column;
-                flex-flow: row wrap;
                 display: flex;
+                flex-direction: column;
+                flex-grow: 1;
                 margin: 0;
                 background: white;
             }
 
+            .widget[active] {
+                animation: fadeIn .7s ease-in;
+            }
+
+            .widget:not([active]) {
+                display: none;
+            }
+
+            .header {
+                padding: 0 .8rem;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 3.2rem;
+            }
+
+            .header h1 {
+                margin: 0;
+                padding: 0;
+                font-size: 7.6rem;
+                font-weight: 700;
+            }
+
+            ape-time {
+                padding: 0;
+                width: auto;
+            }
+
+            ape-weather {
+                padding: .8rem;
+                flex-grow: 1;
+            }
+
         </style>
 
-        <ape-activity-wall></ape-activity-wall>
+        <div class="header">
+            <h1>Apegroup</h1>
+            <ape-time></ape-time>
+        </div>
+
+        <ape-activity-wall class="widget" active></ape-activity-wall>
+        <ape-weather class="widget"></ape-weather>
 
     </template>
 
@@ -40,16 +88,28 @@
             /* Life cycle */
 
             ready() {
-
+                this._interval = 10000;
             },
 
             attached() {
-
+                this._activeIndex = 0;
+                this._widgets = Polymer.dom(this.root).querySelectorAll(`.widget`);
+                setTimeout(this._startTransition.bind(this), this._interval);
             },
 
             detached() {
 
             },
+
+            _startTransition() {
+                this._widgets[this._activeIndex].removeAttribute(`active`);
+                this._activeIndex += 1;
+                if (this._activeIndex === this._widgets.length) {
+                    this._activeIndex = 0;
+                }
+                this._widgets[this._activeIndex].setAttribute(`active`, ``);
+                setTimeout(this._startTransition.bind(this), this._interval);
+            }
 
         });
 
