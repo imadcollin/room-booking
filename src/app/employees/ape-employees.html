@@ -2,6 +2,7 @@
 <link rel="import" href="../widgets/activity-wall/ape-activity-wall.html">
 <link rel="import" href="../widgets/time/ape-time.html">
 <link rel="import" href="../widgets/weather/ape-weather.html">
+<link rel="import" href="../shared/animation/ape-animation.html">
 
 <dom-module id="ape-employees">
 
@@ -26,13 +27,16 @@
             }
 
 
+
             .widget[active] {
                 animation: fadeIn .7s ease-in;
             }
 
+
             .widget:not([active]) {
                 display: none;
             }
+
 
 
             .header {
@@ -44,6 +48,7 @@
             }
 
 
+
             .header h1 {
                 margin: 0;
                 padding: 0;
@@ -53,11 +58,13 @@
 
 
 
+
             ape-time {
                 font-size: 7.2rem;
                 padding: 0;
                 width: auto;
             }
+
 
 
             ape-weather {
@@ -72,6 +79,7 @@
 
         <ape-activity-wall class="widget" active></ape-activity-wall>
         <ape-weather class="widget"></ape-weather>
+        <ape-animation> </ape-animation>
 
     </template>
 
