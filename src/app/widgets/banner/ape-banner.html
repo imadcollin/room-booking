@@ -5,84 +5,82 @@
     <template>
 
         <style>
-            :host {
+             :host {
                 display: flex;
-                flex-direction: column;
-                padding: 1.6rem;
             }
 
-            .first {
-                animation: bannermove 80s  infinite;
-            }
-
-            @keyframes bannermove {
+            @keyframes slidy {
                 0% {
-                    margin-left: 0px;
+                    left: 0%;
+                }
+                20% {
+                    left: 0%;
+                }
+                25% {
+                    left: -100%;
+                }
+                45% {
+                    left: -100%;
+                }
+                50% {
+                    left: -200%;
+                }
+                70% {
+                    left: -200%;
+                }
+                75% {
+                    left: -300%;
+                }
+                95% {
+                    left: -300%;
                 }
                 100% {
-                    margin-left: -18000px;
+                    left: -400%;
                 }
             }
 
-            @-o-keyframes bannermove {
-                0% {
-                    margin-left: 0px;
-                }
-                100% {
-                    margin-left: -18000px;
-                }
+            body {
+                margin: 0;
             }
 
-            .photobanner {
-                height: 56px;
-                width: 10000px;
-                margin-top: 30px;
-            }
-
-            .photobanner img {
-                height: 156px;
-                -webkit-transition: all 0.5s ease;
-                -moz-transition: all 0.5s ease;
-                -o-transition: all 0.5s ease;
-                -ms-transition: all 0.5s ease;
-                transition: all 0.5s ease ;
-            }
-
-            .paused {
-                animation-play-state: running;
-
-            }
-
-            .container1 {
-                width: 1000px;
-                height: 250px;
+            div#slider {
                 overflow: hidden;
-                margin: 0px auto;
+            }
+
+            #slider figure img {
+                width: 10%;
+                height: 350px;
+                float: left;
+            }
+            #slider figure {
+                position: relative;
+                width: 500%;
+                margin: 0;
+                left: 0;
+                animation: 15s slidy infinite;
             }
         </style>
 
         <div id="container">
 
-                <h1>Apegroup  </h1>
 
-            <div class="photobanner">
-
-                <img class="first" src"../assets/media/1.jpg" alt="">
-                <img src="/assets/media/apegroup/1.jpg" alt="">
-                <img src="/assets/media/apegroup/2.jpg" alt="">
-                <img src="/assets/media/apegroup/3.jpg" alt="">
-                <img src="/assets/media/apegroup/4.jpg" alt="">
-                <img src="/assets/media/apegroup/5.jpg" alt="">
-                <img src="/assets/media/apegroup/6.jpg" alt="">
-                <img src="/assets/media/apegroup/7.jpg" alt="">
-                <img src="/assets/media/apegroup/8.jpg" alt="">
-                <img src="/assets/media/apegroup/9.jpg" alt="">
-                <img src="/assets/media/apegroup/10.jpg" alt="">
-                <img src="/assets/media/apegroup/11.jpg" alt="">
-                <img src="/assets/media/apegroup/12.jpg" alt="">
-                <img src="/assets/media/apegroup/13.jpg" alt="">
-                <img src="/assets/media/apegroup/14.jpg" alt="">
-
+            <div id="slider">
+                <figure>
+                    <img class="first" src="/assets/media/apegroup/1.jpg" alt="">
+                    <img src="/assets/media/apegroup/2.jpg" alt="">
+                    <img src="/assets/media/apegroup/3.jpg" alt="">
+                    <img src="/assets/media/apegroup/4.jpg" alt="">
+                    <img src="/assets/media/apegroup/5.jpg" alt="">
+                    <img src="/assets/media/apegroup/6.jpg" alt="">
+                    <img src="/assets/media/apegroup/7.jpg" alt="">
+                    <img src="/assets/media/apegroup/8.jpg" alt="">
+                    <img src="/assets/media/apegroup/9.jpg" alt="">
+                    <img src="/assets/media/apegroup/12.jpg" alt="">
+                    <img src="/assets/media/apegroup/10.jpg" alt="">
+                    <img src="/assets/media/apegroup/11.jpg" alt="">
+                    <img src="/assets/media/apegroup/13.jpg" alt="">
+                    <img src="/assets/media/apegroup/14.jpg" alt="">
+                </figure>
             </div>
         </div>
 
