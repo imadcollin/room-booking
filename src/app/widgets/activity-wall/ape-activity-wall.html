@@ -124,7 +124,7 @@
             },
 
             attached() {
-                this.usersRef = firebase.database().ref(`/users`);
+                this.usersRef = firebase.database().ref(`/users`).limitToFirst(25);//Where LimitToFirst is Firebase query
                 this.usersRef.on(`value`, (data) => {
                     const items = data.val();
                     this.usersData = Object.keys(items).map(key => items[key]);
