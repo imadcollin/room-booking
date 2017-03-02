@@ -66,6 +66,7 @@ const config = {
                 'tablet': `(min-width: 720px)`,
                 'desktop': `(min-width: 1024px)`,
                 'lg-desktop': `(min-width: 1440px)`,
+                'xl-desktop': `(min-width: 1920)`
             }
         },
         src: [
