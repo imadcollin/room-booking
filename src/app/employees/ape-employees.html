@@ -30,7 +30,6 @@
                 animation: fadeIn .7s ease-in;
             }
 
-
             .widget:not([active]) {
                 display: none;
             }
@@ -53,6 +52,7 @@
             }
 
 
+
             ape-time {
                 font-size: 7.2rem;
                 padding: 0;
@@ -64,71 +64,7 @@
                 padding: .8rem;
                 flex-grow: 1;
             }
-            /* ANIMATIONS */
-
-            @keyframes animateBubble {
-                0% {
-                    margin-top: 1000px;
-                }
-                100% {
-                    margin-top: -100%;
-                }
-            }
-
-            @keyframes sideWays {
-                0% {
-                    margin-left: 0px;
-                }
-                100% {
-                    margin-left: 50px;
-                }
-            }
-
-
-            .x1 {
-                animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
-                left: -5%;
-                top: 5%;
-                transform: scale(0.6);
-            }
-            /* OBJECTS */
-
-            #background-wrap {
-                bottom: 0;
-                left: 0;
-                position: fixed;
-                right: 0;
-                top: 0;
-                z-index: -1;
-            }
-
-
-            .bubble {
-                border-radius: 50%;
-                box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
-                height: 200px;
-                position: absolute;
-                width: 200px;
-            }
-
-
-            .bubble:after {
-                background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#00ffffff', GradientType=1);
-                border-radius: 50%;
-                box-shadow: inset 0 20px 30px rgba(255, 255, 255, 0.3);
-                content: "";
-                height: 180px;
-                left: 10px;
-                position: absolute;
-                width: 180px;
-            }
         </style>
-        <div id="background-wrap">
-            <div class="bubble x1"></div>
-            <!--<div class="bubble x2"></div>-->
-
-        </div>
         <div class="header">
             <h1>Apewall</h1>
             <ape-time></ape-time>
