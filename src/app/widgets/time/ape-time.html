@@ -69,13 +69,14 @@
                 // TODO: can we use localized behaviour to format date instead?
                 const hourFormatted = this._addZeroIfSingleDigit(hour);
                 const minutesFormatted = this._addZeroIfSingleDigit(minutes);
-                const secondsFormatted = this._addZeroIfSingleDigit(seconds);
+                // const secondsFormatted = this._addZeroIfSingleDigit(seconds);
 
                 // set the formatted time
-                this.time =  `${hourFormatted}:${minutesFormatted}:${secondsFormatted}`;
+                // this.time =  `${hourFormatted}:${minutesFormatted}:${secondsFormatted}`;
+                this.time =  `${hourFormatted}:${minutesFormatted}`;
 
                 // recursively call the function again
-                this._timeoutId = setTimeout(this._startClock.bind(this), 500);
+                this._timeoutId = setTimeout(this._startClock.bind(this), 1000);
             },
 
             /**
