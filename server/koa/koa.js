@@ -65,7 +65,7 @@ app.use(serve(build, {index: false}));
 app.use(async (ctx) => {
     ctx.set(`Content-Type`, `text/html; charset=utf-8`);
     ctx.set(`Cache-Control`, `max-age=0`);
-    const indexPath = path.resolve(`${__dirname}/../../src/index.html`);
+    const indexPath = path.resolve(`${__dirname}/../../build/index.html`);
     const readStream = createReadStream(indexPath);
     ctx.body = readStream;
     ctx.status = 200;
