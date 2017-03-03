@@ -3,7 +3,6 @@
     // Configure editor settings
     "editor.cursorStyle": "line",
     "editor.rulers": [],
-    "editor.wrappingColumn": -1,
     "editor.renderWhitespace": "all",
     "editor.renderIndentGuides": true,
     "editor.folding": false,
