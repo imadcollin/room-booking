@@ -98,19 +98,29 @@
                 background: white;
                 padding: 7%;
             }
+
+            .Birthday[has-birth-day] {
+                position: absolute;
+                width: 30%;
+                height: 30%;
+                top: 60%;
+                right: -4%;
+                background: darkred;
+                /*Add placeholder*/
+                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            }
         </style>
 
         <div class="card-container">
             <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
                 <div class="card" out-of-office$="[[!user.isInOffice]]">
                     <div class="card_layout">
-                        <div class="ribbon">
+                        <div class="Birthday" has-birth-day$=[[!user.hasBirthdayToday]]> </div>
 
-                            <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
-                            <div class="text-container">
-                                <div class="status" meeting$="[[user.isInMeeting]]"></div>
-                                <div class="name">[[user.firstname]] [[user.lastname]]</div>
-                            </div>
+                        <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                        <div class="text-container">
+                            <div class="status" meeting$="[[user.isInMeeting]]"></div>
+                            <div class="name">[[user.firstname]] [[user.lastname]]</div>
                         </div>
                     </div>
 
@@ -119,6 +129,7 @@
         </div>
 
     </template>
+
 
     <script>
         Polymer({
