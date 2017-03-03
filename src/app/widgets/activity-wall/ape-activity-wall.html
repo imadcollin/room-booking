@@ -6,8 +6,7 @@
     <template>
 
         <style>
-
-            :host {
+             :host {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -15,11 +14,15 @@
                 height: 100%;
             }
 
+
+
             .card-container {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
             }
+
+
 
             .card {
                 display: block;
@@ -31,11 +34,15 @@
                 margin-bottom: 1.6rem;
             }
 
+
+
             .profile-img {
                 width: 100%;
                 object-fit: cover;
                 margin-bottom: .8rem;
             }
+
+
 
             .profile-img:after {
                 content: "";
@@ -43,10 +50,14 @@
                 padding-bottom: 100%;
             }
 
+
+
             .text-container {
                 display: flex;
                 align-items: center;
             }
+
+
 
             .status {
                 display: none;
@@ -59,40 +70,57 @@
                 background-color: var(--primary-color);
             }
 
+
+
             .name {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 padding-right: .4rem;
-                font-size: 1.6rem;
+                /*font-size: 1.6rem;*/
             }
+
+
 
             .card[out-of-office] {
                 opacity: 0.5;
             }
 
+
+
             .status[meeting] {
                 display: block;
             }
 
+
+            .card_layout {
+                position: relative;
+                background: white;
+                padding: 7%;
+            }
         </style>
 
         <div class="card-container">
             <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
                 <div class="card" out-of-office$="[[!user.isInOffice]]">
-                    <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
-                    <div class="text-container">
-                        <div class="status" meeting$="[[user.isInMeeting]]"></div>
-                        <div class="name">[[user.firstname]] [[user.lastname]]</div>
+                    <div class="card_layout">
+                        <div class="ribbon">
+
+                            <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                            <div class="text-container">
+                                <div class="status" meeting$="[[user.isInMeeting]]"></div>
+                                <div class="name">[[user.firstname]] [[user.lastname]]</div>
+                            </div>
+                        </div>
                     </div>
-                 </div>
+
+                </div>
             </template>
         </div>
 
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-activity-wall`,
@@ -137,7 +165,6 @@
             },
 
         });
-
     </script>
 
 </dom-module>
