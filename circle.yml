@@ -7,7 +7,7 @@ machine:
     Europe/Stockholm
   environment:
     VERSION: $(echo $CIRCLE_TAG | sed 's/[\",.,-]//g')
-    DEV_PROJECT_NAME: dev-xxxx-xxx
+    DEV_PROJECT_NAME: dev-euw-apewall-apegroup
     STG_PORJECT_NAME: stg-xxxx-xxx
     PRD_PROJECT_NAME: prd-xxxx-xxx
 
@@ -25,10 +25,7 @@ deployment:
       - npm run gulp build --dev
 
       # FIREBASE DEPLOYMENT
-    #   - firebase deploy --project=$DEV_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$VERSION --only=hosting --non-interactive
-
-      # GCLOUD DEPLOYMENT
-    #   - TODO
+      #   - firebase deploy --project=$DEV_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$VERSION --only=hosting --non-interactive
 
   stage:
     tag: /^v\d+\.\d+\.\d+-rc\.\d+$/
@@ -40,9 +37,6 @@ deployment:
       # FIREBASE DEPLOYMENT
     #   - firebase deploy --project=$STG_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$VERSION --only=hosting --non-interactive
 
-      # GCLOUD DEPLOYMENT
-    #   - TODO
-
   prod:
     tag: /^v\d+\.\d+\.\d+$/
     owner: apegroup
@@ -52,6 +46,3 @@ deployment:
 
       # FIREBASE DEPLOYMENT
     #   - firebase deploy --project=$PRD_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$VERSION --only=hosting --non-interactive
-
-      # GCLOUD DEPLOYMENT
-    #   - TODO
