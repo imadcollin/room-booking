@@ -5,6 +5,8 @@
 machine:
   timezone:
     Europe/Stockholm
+  node:
+    version: 6.1.0
   environment:
     VERSION: $(echo $CIRCLE_TAG | sed 's/[\",.,-]//g')
     DEV_PROJECT_NAME: dev-euw-apewall-apegroup
