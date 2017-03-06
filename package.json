@@ -8,12 +8,13 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "firebase": "firebase",
     "gulp": "./node_modules/gulp-cli/bin/gulp.js --gulpfile=./gulp/gulp.js --require babel-register --cwd=./",
     "myName": "echo $npm_package_name",
     "myVersion": "echo $npm_package_version | sed 's/[\",.,-]//g'",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
-    "start": "node --require babel-register ./",
+    "start": "firebase serve --port=3000",
     "test": "npm run test:client",
     "test:client": "wct --local=chrome './src/**/*.spec.html'",
     "test:server": "mocha --compilers js:babel-register ./server/**/*.spec.js"
@@ -35,6 +36,7 @@
     "del": "^2.2.2",
     "eslint": "^3.12.2",
     "eslint-plugin-html": "^1.7.0",
+    "firebase-tools": "^3.4.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^2.3.2",
