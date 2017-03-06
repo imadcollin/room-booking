@@ -14,7 +14,6 @@
         <style>
 
             :host {
-
                 --baseline: 2.4rem; /* font-size-md x line-height-comfort */
 
                 --line-height: 1.2;
@@ -58,7 +57,8 @@
         <iron-pages selected="[[page]]" attr-for-selected="selected" selected-attribute="visible" fallback-selection="404" on-iron-select="_listenerIronSelect">
             <ape-home selected="home"></ape-home>
             <ape-board selected="board"></ape-board>
-            <ape-employees selected="employees"></ape-employees>
+            <ape-employees selected="employees" user="[[user]]"></ape-employees>
+            <ape-login selected="login" on-login-success="_listenerLoginSuccess"></ape-login>
             <ape-style selected="style"></ape-style>
         </iron-pages>
 
@@ -80,6 +80,9 @@
                 },
                 page: {
                     type: String
+                },
+                user: {
+                    type: Object
                 }
             },
 
@@ -94,26 +97,31 @@
             },
 
             attached() {
-
+                firebase.auth().onAuthStateChanged((user) => {
+                    this.user = user;
+                    if (!this.user) {
+                        this.page = `login`;
+                    }
+                });
             },
 
             detached() {
 
             },
 
-            /* Observers */
-
             _observerRouterPage(page) {
                 this.page = (page === ``) ? `home` : page;
             },
-
-            /* Listeners */
 
             _listenerIronSelect() {
                 const name = event.target.selected;
                 const importHref = `${this.page}/ape-${name}.html`;
                 this.importHref(this.resolveUrl(importHref), null, null, true);
-            }
+            },
+
+            _listenerLoginSuccess() {
+                this.page = (this.router.page === ``) ? `home` : this.router.page;
+            },
 
         });
 
