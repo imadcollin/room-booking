@@ -6,6 +6,7 @@
     <template>
 
         <style>
+
              :host {
                 display: flex;
                 flex-direction: column;
@@ -14,27 +15,22 @@
                 height: 100%;
             }
 
-
-
             .card-container {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
             }
 
-
-
             .card {
                 display: block;
+                position: relative;
                 flex-grow: 0;
                 flex-shrink: 0;
-                flex-basis: 10%;
+                flex-basis: 8.3333333%;
                 overflow: hidden;
                 padding: 0.8rem 0.8rem 0 0.8rem;
                 margin-bottom: 1.6rem;
             }
-
-
 
             .profile-img {
                 width: 100%;
@@ -42,22 +38,16 @@
                 margin-bottom: .8rem;
             }
 
-
-
             .profile-img:after {
                 content: "";
                 display: block;
                 padding-bottom: 100%;
             }
 
-
-
             .text-container {
                 display: flex;
                 align-items: center;
             }
-
-
 
             .status {
                 display: none;
@@ -70,36 +60,22 @@
                 background-color: var(--primary-color);
             }
 
-
-
             .name {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 padding-right: .4rem;
-                /*font-size: 1.6rem;*/
             }
-
-
 
             .card[out-of-office] {
                 opacity: 0.5;
             }
 
-
-
             .status[meeting] {
                 display: block;
             }
 
-
-            .card_layout {
-                position: relative;
-                background: white;
-                padding: 7%;
-            }
-
-            .Birthday[has-birth-day] {
+            .birthday[has-birth-day] {
                 position: absolute;
                 width: 30%;
                 height: 30%;
@@ -109,29 +85,26 @@
                 /*Add placeholder*/
                 clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             }
+
         </style>
 
         <div class="card-container">
-            <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
+            <template is="dom-repeat" items="[[usersData]]" as="user">
                 <div class="card" out-of-office$="[[!user.isInOffice]]">
-                    <div class="card_layout">
-                        <div class="Birthday" has-birth-day$=[[!user.hasBirthdayToday]]> </div>
-
-                        <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
-                        <div class="text-container">
-                            <div class="status" meeting$="[[user.isInMeeting]]"></div>
-                            <div class="name">[[user.firstname]] [[user.lastname]]</div>
-                        </div>
+                    <div class="birthday" has-birth-day$=[[!user.hasBirthdayToday]]> </div>
+                    <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                    <div class="text-container">
+                        <div class="status" meeting$="[[user.isInMeeting]]"></div>
+                        <div class="name">[[user.firstname]] [[user.lastname]]</div>
                     </div>
-
                 </div>
             </template>
         </div>
 
     </template>
 
-
     <script>
+
         Polymer({
 
             is: `ape-activity-wall`,
@@ -159,7 +132,7 @@
             },
 
             attached() {
-                this.usersRef = firebase.database().ref(`/users`).limitToFirst(25);//Where LimitToFirst is Firebase query
+                this.usersRef = firebase.database().ref(`/users`);
                 this.usersRef.on(`value`, (data) => {
                     const items = data.val();
                     this.usersData = Object.keys(items).map(key => items[key]);
@@ -176,6 +149,7 @@
             },
 
         });
+
     </script>
 
 </dom-module>

@@ -1,6 +1,7 @@
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 <link rel="import" href="../widgets/activity-wall/ape-activity-wall.html">
 <link rel="import" href="../widgets/time/ape-time.html">
+<link rel="import" href="../widgets/wall/ape-wall.html">
 <link rel="import" href="../widgets/weather/ape-weather.html">
 <link rel="import" href="../shared/animation/ape-animation.html">
 
@@ -9,6 +10,7 @@
     <template>
 
         <style>
+
             @keyframes fadeIn {
                 from {
                     opacity: 0;
@@ -24,22 +26,17 @@
                 flex-direction: column;
                 flex-grow: 1;
                 margin: 0;
-                background-image: url("http://www.kazam.mobi/html/img/backgrounds/glow-bg.jpg");
-                z-index: -1;
+                /*background-image: url("http://www.kazam.mobi/html/img/backgrounds/glow-bg.jpg");
+                z-index: -1;*/
             }
-
-
 
             .widget[active] {
                 animation: fadeIn .7s ease-in;
             }
 
-
             .widget:not([active]) {
                 display: none;
             }
-
-
 
             .header {
                 padding: 0 .8rem;
@@ -49,39 +46,36 @@
                 align-items: baseline;
             }
 
-
-
             .header h1 {
                 margin: 0;
                 padding: 0;
                 font-size: 7.2rem;
-                font-weight: 700;
+                font-weight: 900;
+                font-family: var(--font-family-black);
             }
-
-
-
 
             ape-time {
                 font-size: 7.2rem;
                 padding: 0;
                 width: auto;
+                font-family: var(--font-family-light);
             }
-
-
 
             ape-weather {
                 padding: .8rem;
                 flex-grow: 1;
             }
+
         </style>
+
         <div class="header">
             <h1>Apewall</h1>
             <ape-time></ape-time>
         </div>
-
+        <!--<ape-wall></ape-wall>-->
         <ape-activity-wall class="widget" active></ape-activity-wall>
-        <ape-weather class="widget"></ape-weather>
-        <ape-animation> </ape-animation>
+        <!--<ape-weather class="widget"></ape-weather>-->
+        <!--<ape-animation> </ape-animation>-->
 
     </template>
 
