@@ -25,7 +25,7 @@ deployment:
       - npm run gulp build --dev
 
       # FIREBASE DEPLOYMENT
-      #   - firebase deploy --project=$DEV_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$VERSION --only=hosting --non-interactive
+      - firebase deploy --project=$DEV_PROJECT_NAME --token=$FIREBASE_TOKEN --message=$CIRCLE_TAG --only=hosting --non-interactive
 
   stage:
     tag: /^v\d+\.\d+\.\d+-rc\.\d+$/
