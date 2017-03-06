@@ -1,6 +1,6 @@
 {
   "name": "apegroup-dashboard-web",
-  "version": "0.1.0-build.2",
+  "version": "0.1.0-build.3",
   "description": "Progressive Web Application.",
   "private": true,
   "main": "server",
