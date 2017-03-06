@@ -27,13 +27,14 @@
                 flex-grow: 0;
                 flex-shrink: 0;
                 flex-basis: 8.3333333%;
-                overflow: hidden;
+                width: 8.3333333%;
                 padding: 0.8rem 0.8rem 0 0.8rem;
                 margin-bottom: 1.6rem;
             }
 
             .profile-img {
                 width: 100%;
+                height: auto;
                 object-fit: cover;
                 margin-bottom: .8rem;
             }
@@ -67,36 +68,42 @@
                 padding-right: .4rem;
             }
 
-            .card[out-of-office] {
-                opacity: 0.5;
-            }
-
             .status[meeting] {
                 display: block;
             }
 
             .birthday[has-birth-day] {
                 position: absolute;
-                width: 30%;
-                height: 30%;
-                top: 60%;
-                right: -4%;
-                background: darkred;
-                /*Add placeholder*/
-                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+                width: 4.8rem;
+                height: 4.8rem;
+                top: -0.8rem;
+                right: -0.8rem;
+                z-index: 3;
+                background-color: rgba(5, 174, 240, 1);
+                border-radius: 50%;
+            }
+
+            .overlay[out-of-office] {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.5);
             }
 
         </style>
 
         <div class="card-container">
             <template is="dom-repeat" items="[[usersData]]" as="user">
-                <div class="card" out-of-office$="[[!user.isInOffice]]">
-                    <div class="birthday" has-birth-day$=[[!user.hasBirthdayToday]]> </div>
+                <div class="card">
+                    <div class="birthday" has-birth-day$="[[!user.hasBirthdayToday]]"></div>
                     <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
                     <div class="text-container">
                         <div class="status" meeting$="[[user.isInMeeting]]"></div>
                         <div class="name">[[user.firstname]] [[user.lastname]]</div>
                     </div>
+                    <div class="overlay" out-of-office$="[[!user.isInOffice]]"></div>
                 </div>
             </template>
         </div>
