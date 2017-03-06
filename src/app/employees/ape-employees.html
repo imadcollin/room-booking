@@ -86,12 +86,19 @@
             ],
 
             properties: {
+                visible: {
+                    type: Boolean,
+                    value: false
+                },
                 user: {
                     type: Object,
-                    value: () => null,
-                    observer: `_observerUser`
+                    value: () => null
                 }
             },
+
+            observers: [
+                `_observerUserAndVisible(user, visible)`
+            ],
 
             /* Life cycle */
 
@@ -109,10 +116,10 @@
 
             },
 
-            _observerUser(user) {
-                if (user) {
+            _observerUserAndVisible(user, visible) {
+                if (user && visible) {
                     this.$.wall.activate();
-                } else {
+                } else if (!user) {
                     this.$.wall.deactivate();
                 }
             },
