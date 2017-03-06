@@ -70,12 +70,13 @@
             <ape-time></ape-time>
         </div>
 
-        <ape-activity-wall class="widget" active></ape-activity-wall>
+        <ape-activity-wall id="wall" class="widget" active></ape-activity-wall>
         <ape-animation></ape-animation>
 
     </template>
 
     <script>
+
         Polymer({
 
             is: `ape-employees`,
@@ -85,7 +86,11 @@
             ],
 
             properties: {
-
+                user: {
+                    type: Object,
+                    value: () => null,
+                    observer: `_observerUser`
+                }
             },
 
             /* Life cycle */
@@ -97,11 +102,19 @@
             attached() {
                 this._activeIndex = 0;
                 this._widgets = Polymer.dom(this.root).querySelectorAll(`.widget`);
-                setTimeout(this._startTransition.bind(this), this._interval);
+                // setTimeout(this._startTransition.bind(this), this._interval);
             },
 
             detached() {
 
+            },
+
+            _observerUser(user) {
+                if (user) {
+                    this.$.wall.activate();
+                } else {
+                    this.$.wall.deactivate();
+                }
             },
 
             _startTransition() {
@@ -115,6 +128,7 @@
             }
 
         });
+
     </script>
 
 </dom-module>

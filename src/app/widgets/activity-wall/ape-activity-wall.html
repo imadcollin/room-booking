@@ -80,6 +80,7 @@
                 right: -0.8rem;
                 background-color: rgba(5, 174, 240, 1);
                 border-radius: 50%;
+                z-index: 1;
             }
 
             .overlay[out-of-office] {
@@ -138,6 +139,14 @@
             },
 
             attached() {
+
+            },
+
+            detached() {
+
+            },
+
+            activate() {
                 this.usersRef = firebase.database().ref(`/users`);
                 this.usersRef.on(`value`, (data) => {
                     const items = data.val();
@@ -145,8 +154,8 @@
                 });
             },
 
-            detached() {
-
+            deactivate() {
+                this.usersData = [];
             },
 
             _sort(a, b) {
