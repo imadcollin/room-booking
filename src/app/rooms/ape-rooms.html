@@ -14,19 +14,24 @@
 
         <h2>Hello</h2>
         <div>Avaliable room
-            <li>room 1 </li>
-            <li>room 2 </li>
-            <li>room 3</li>
-            <li>room 3</li>
-            <li>room 4 </li>
-
+            <!--Fetch the rooms -->
+            <template is="dom-repeat" items="[[roomsData]]" as="room">
+                <li> Room No:[[room.number]] Capacity:[[room.capacity]] <br>
+                </li>
+            </template>
         </div>
+
+        <!--conditional repeat where the room is avialable  -->
         <div>Booked rooms
-            <li>room 1</li>
-            <li>room 3</li>
-            <li>room 5</li>
+            <template is="dom-repeat" items="[[roomsData]]" as="room">
 
+                <template is="dom-if" if="{{!room.available}}">
+
+                    <li> No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]</li>
+                </template>
         </div>
+
+
         <div>Employees at meeting with rooms number and time
             <li>Bob meet Alice from <b>13:00</b> to <b>14:30</b></li>
             <li>Eva meet Nour from <b>15:00</b> to <b>16:30</b></li>
@@ -34,11 +39,6 @@
         <div>Booking Area Please selec avaliable room for booking "DropDownList" <br>
             <button type="button">Book </button>
         </div>
-        <!--Fetch the rooms -->
-        <h2>Room from firebase </h2>
-        <template is="dom-repeat" items="[[roomsData]]" as="room">
-            Room No:[[room.number]] Room Capacity:[[room.capacity]] <br>
-        </template>
 
         <!--fetch the employees -->
         <h2>Employees</h2>
@@ -47,55 +47,65 @@
             [[employee.name]]
         </template>
 
-        <!--conditional repeat where the room is avialable  -->
-        <template is="dom-if" items="[[roomsData]]" as="room" if="{{room.available}}">
-            No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]
         </template>
-    </template>
 
-    <script>
-        Polymer({
+        <script>
+            Polymer({
 
-            is: `ape-rooms`,
+                is: `ape-rooms`,
 
-            behaviors: [
+                behaviors: [
 
-            ],
+                ],
 
-            properties: {
-                roomsData: {
-                    type: Array,
-                    value: () => []
+                properties: {
+                    roomsData: {
+                        type: Array,
+                        value: () => []
+                    },
+
+                    available: {
+                        type: Boolean,
+                    },
+                    employeesData: {
+                        type: Array,
+                        observer: `empolyeeStatus`
+                    },
+                    employeesAtMeeting: {
+                        type: Array,
+                        observer: `employeesAtMeetingStatus`
+                    }
+
                 },
 
-                available: {
-                    type: Boolean,
+                /* Life cycle */
+
+                ready() {
+
                 },
-                employeesData: {
-                    type: Object,
-                    value: function () {
-                        return [{ name: `Bob` }, { name: `Alice` }, { name: `Eva` }];
+
+                attached() {
+
+                },
+
+                detached() {
+
+                },
+                empolyeeStatus(newEmployees) {
+                    let employeesAtMeeting = [];
+
+                    if (newEmployees !== null && newEmployees !== undefined) {
+
+                        for (let i = 0; i < newEmployees.length; i++) {
+                            //If some condtiions make new array for meeting
+                            employeesAtMeeting.push(newEmployees[i]); //Push all employees for now
+                        }
+                        this.employeesAtMeeting = employeesAtMeeting;
                     }
                 }
 
-            },
 
-            /* Life cycle */
-
-            ready() {
-
-            },
-
-            attached() {
-
-            },
-
-            detached() {
-
-            },
-
-
-        });
-    </script>
+            });
+        </script>
 
 </dom-module>
