@@ -34,6 +34,13 @@
         <div>Booking Area Please selec avaliable room for booking "DropDownList" <br>
             <button type="button">Book </button>
         </div>
+
+        <h2>Room from firebase </h2>
+        <template is="dom-repeat" items="[[roomsData]]" as="room">
+
+            No:[[room.number]] Capacity:[[room.capacity]]
+
+        </template>
     </template>
 
     <script>
@@ -46,11 +53,11 @@
             ],
 
             properties: {
-                usersData: {
+                roomsData: {
                     type: Array,
                     value: () => []
                 },
-                usersRef: {
+                roomsRef: {
                     type: Object,
                     value: () => null
 
@@ -65,11 +72,11 @@
             },
 
             attached() {
-                this.usersRef = firebase.database().ref(`/rooms`);
-                this.usersRef.on(`value`, (data) => {
+                this.roomsRef = firebase.database().ref(`/rooms`);
+                this.roomsRef.on(`value`, (data) => {
                     const items = data.val();
-                    this.usersData = Object.keys(items).map(key => items[key]);
-                    console.log(`the data `,this.usersData);
+                    this.roomsData = Object.keys(items).map(key => items[key]);
+                    console.log(`the data `, this.roomsData);
                 });
             },
 
