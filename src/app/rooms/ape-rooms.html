@@ -43,7 +43,7 @@
         <!--fetch the employees -->
         <h2>Employees</h2>
         Employees at the Office :
-        <template is="dom-repeat" items="[[employees]]" as="employee">
+        <template is="dom-repeat" items="[[employeesData]]" as="employee">
             [[employee.name]]
         </template>
 
@@ -51,7 +51,6 @@
         <template is="dom-if" items="[[roomsData]]" as="room" if="{{room.available}}">
             No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]
         </template>
-
     </template>
 
     <script>
@@ -68,14 +67,11 @@
                     type: Array,
                     value: () => []
                 },
-                roomsRef: {
-                    type: Object,
-                    value: () => null
-                },
+
                 available: {
                     type: Boolean,
                 },
-                employees: {
+                employeesData: {
                     type: Object,
                     value: function () {
                         return [{ name: `Bob` }, { name: `Alice` }, { name: `Eva` }];
@@ -91,12 +87,7 @@
             },
 
             attached() {
-                this.roomsRef = firebase.database().ref(`/rooms`);
-                this.roomsRef.on(`value`, (data) => {
-                    const items = data.val();
-                    this.roomsData = Object.keys(items).map(key => items[key]);
-                    console.log(`the data `, this.roomsData);
-                });
+
             },
 
             detached() {
