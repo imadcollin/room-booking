@@ -11,9 +11,9 @@
     <template>
 
         <style>
-
-            :host {
-                --baseline: 2.4rem; /* font-size-md x line-height-comfort */
+             :host {
+                --baseline: 2.4rem;
+                /* font-size-md x line-height-comfort */
 
                 --line-height: 1.2;
                 --line-height-comfort: 1.6;
@@ -41,13 +41,14 @@
                 color: var(--primary-color);
             }
 
+
+
             iron-pages {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
                 position: relative;
             }
-
         </style>
 
         <app-location route="{{route}}"></app-location>
@@ -59,14 +60,13 @@
             <ape-employees selected="employees" user="[[user]]"></ape-employees>
             <ape-login selected="login" on-login-success="_listenerLoginSuccess"></ape-login>
             <ape-style selected="style"></ape-style>
-            <ape-rooms selected="rooms"> </ape-rooms>
-            <ape-booking selected="booking"></ape-booking>
+            <ape-rooms selected="rooms" rooms-data="{{roomsData}}"> </ape-rooms>
+            <ape-booking selected="booking" rooms="{{roomsData}}"></ape-booking>
         </iron-pages>
 
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-app`,
@@ -84,6 +84,23 @@
                 },
                 user: {
                     type: Object
+                },
+                roomsData: {
+                    type: Array,
+                    value: () => []
+                },
+                roomsRef: {
+                    type: Object,
+                    value: () => null
+                },
+                available: {
+                    type: Boolean,
+                },
+                employees: {
+                    type: Object,
+                    value: function () {
+                        return [{ name: `Bob` }, { name: `Alice` }, { name: `Eva` }];
+                    }
                 }
             },
 
@@ -98,6 +115,12 @@
             },
 
             attached() {
+                this.roomsRef = firebase.database().ref(`/rooms`);
+                this.roomsRef.on(`value`, (data) => {
+                    const items = data.val();
+                    this.roomsData = Object.keys(items).map(key => items[key]);
+                    console.log(`the data `, this.roomsData);
+                });
                 firebase.auth().onAuthStateChanged((user) => {
                     this.user = user;
                     if (!this.user) {
@@ -125,7 +148,6 @@
             },
 
         });
-
     </script>
 
 </dom-module>
