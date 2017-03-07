@@ -28,17 +28,16 @@
         <p>Project or Client <input type="text" name="firstname"> </p>
         <p>Description <textarea rows="4" cols="50"> </p>
 
-        <p>Employees from the office <b>dropdown select</b></p>
-        <button type="button">Book</button>
-        <button type=" button">Cancel</button>
-
+        <p> Please select employees will be in the meeting </p>
         <!--Get all roms from appe -->
      <select>
         <template is="dom-repeat" items="{{employeesData}}" as="user">
                  <option value="[[user.name]]">[[user.name]]</option>
         </template>
     </select>
-
+    Actions
+        <button type="button">Book</button>
+        <button type=" button">Cancel</button>
     </template>
 
     <script>
