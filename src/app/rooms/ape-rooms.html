@@ -5,21 +5,36 @@
     <template>
 
         <style>
-
-            :host {
+             :host {
                 display: flex;
                 flex-direction: column;
                 padding: 1.6rem;
             }
-
         </style>
 
+        <h2>Hello</h2>
+        <div>Avaliable room
+            <li>room 1 </li>
+            <li>room 2 </li>
+            <li>room 3</li>
+            <li>room 3</li>
+            <li>room 4 </li>
 
+        </div>
+        <div>Booked rooms
+            <li>room 1</li>
+            <li>room 3</li>
+            <li>room 5</li>
+
+        </div>
+        <div>Employees at meeting with rooms number and time
+            <li>Bob meet Alice from <b>13:00</b> to <b>14:30</b></li>
+            <li>Eva meet Nour from <b>15:00</b> to <b>16:30</b></li>
+        </div>
 
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-rooms`,
@@ -48,7 +63,6 @@
 
 
         });
-
     </script>
 
 </dom-module>
