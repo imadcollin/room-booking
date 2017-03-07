@@ -1,4 +1,5 @@
 <link rel="import" href="../../../assets/libs/polymer/polymer.html">
+<link rel="import" href="../../../assets/libs/iron-image/iron-image.html">
 <link rel="import" href="../../shared/firebase/firebase.html">
 
 <dom-module id="ape-activity-wall">
@@ -37,6 +38,7 @@
                 height: auto;
                 object-fit: cover;
                 margin-bottom: .8rem;
+                background-color: #b9b9b9;
             }
 
             .profile-img:after {
@@ -98,7 +100,7 @@
             <template is="dom-repeat" items="[[usersData]]" as="user">
                 <div class="card">
                     <div class="birthday" has-birth-day$="[[user.hasBirthdayToday]]"></div>
-                    <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                    <iron-image class="profile-img" sizing="cover" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]"></iron-image>
                     <div class="text-container">
                         <div class="status" meeting$="[[user.isInMeeting]]"></div>
                         <div class="name">[[user.firstname]] [[user.lastname]]</div>
