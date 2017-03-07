@@ -34,13 +34,24 @@
         <div>Booking Area Please selec avaliable room for booking "DropDownList" <br>
             <button type="button">Book </button>
         </div>
-
+        <!--Fetch the rooms -->
         <h2>Room from firebase </h2>
         <template is="dom-repeat" items="[[roomsData]]" as="room">
-
-            No:[[room.number]] Capacity:[[room.capacity]]
-
+            Room No:[[room.number]] Room Capacity:[[room.capacity]] <br>
         </template>
+
+        <!--fetch the employees -->
+        <h2>Employees</h2>
+        Employees at the Office :
+        <template is="dom-repeat" items="[[employees]]" as="employee">
+            [[employee.name]]
+        </template>
+
+        <!--conditional repeat where the room is avialable  -->
+        <template is="dom-if" items="[[roomsData]]" as="room" if="{{room.available}}">
+            No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]
+        </template>
+
     </template>
 
     <script>
@@ -60,7 +71,15 @@
                 roomsRef: {
                     type: Object,
                     value: () => null
-
+                },
+                available: {
+                    type: Boolean,
+                },
+                employees: {
+                    type: Object,
+                    value: function () {
+                        return [{ name: `Bob` }, { name: `Alice` }, { name: `Eva` }];
+                    }
                 }
 
             },
