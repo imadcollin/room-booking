@@ -1,5 +1,9 @@
 # APEGROUP DASHBOARD
 
+This  branch contains the feature where the user can select rooms and book them.
+The new feature shall allow the user to check all avaliable rooms and all boooked rooms.
+One advantage is to show all facilities within the company and people status.
+
 ## Getting started
 1. Download and install [NodeJS](https://nodejs.org) (>=v6.0.0) if you don't have it already.
 
