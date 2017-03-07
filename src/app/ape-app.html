@@ -44,6 +44,12 @@
 
 
 
+
+
+
+
+
+
             iron-pages {
                 display: flex;
                 flex-direction: column;
@@ -61,8 +67,8 @@
             <ape-employees selected="employees" user="[[user]]"></ape-employees>
             <ape-login selected="login" on-login-success="_listenerLoginSuccess"></ape-login>
             <ape-style selected="style"></ape-style>
-            <ape-rooms selected="rooms"  rooms-data="{{roomsData}}"> </ape-rooms>
-            <ape-booking selected="booking" rooms="{{roomsData}}"></ape-booking>
+            <ape-rooms selected="rooms" rooms-data="{{roomsData}}"> </ape-rooms>
+            <ape-booking selected="booking" employees-data="{{emploeeysData}}" rooms="{{roomsData}}"></ape-booking>
         </iron-pages>
 
     </template>
@@ -77,6 +83,12 @@
             ],
 
             properties: {
+                emploeeysData: {
+                    type: Array,
+                    value: function () {
+                        return [{ name: `Bob` }, { name: `Alice` }, { name: `Eva` }];
+                    }
+                },
                 router: {
                     type: Object
                 },
