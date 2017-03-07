@@ -97,7 +97,7 @@
         <div class="card-container">
             <template is="dom-repeat" items="[[usersData]]" as="user">
                 <div class="card">
-                    <div class="birthday" has-birth-day$="[[!user.hasBirthdayToday]]"></div>
+                    <div class="birthday" has-birth-day$="[[user.hasBirthdayToday]]"></div>
                     <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
                     <div class="text-container">
                         <div class="status" meeting$="[[user.isInMeeting]]"></div>
