@@ -46,6 +46,15 @@
             ],
 
             properties: {
+                usersData: {
+                    type: Array,
+                    value: () => []
+                },
+                usersRef: {
+                    type: Object,
+                    value: () => null
+
+                }
 
             },
 
@@ -56,7 +65,12 @@
             },
 
             attached() {
-
+                this.usersRef = firebase.database().ref(`/rooms`);
+                this.usersRef.on(`value`, (data) => {
+                    const items = data.val();
+                    this.usersData = Object.keys(items).map(key => items[key]);
+                    console.log(`the data `,this.usersData);
+                });
             },
 
             detached() {
