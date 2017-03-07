@@ -16,17 +16,23 @@
         <h4>New Booking</h4>
 
         <p>Select a room "Should show avalialbe rooms wiht capacity" </p>
-        <p>From <b>SelectTime</b> To <b>SelectTime</b></p>
-        <p>Project or Client <b> inputField</b></p>
-        <p>Description <b> Textarea  </b></p>
+        <select>
+        <template is="dom-repeat" items="{{rooms}}" as="room">
+        <option value="[[room.number]]">[[room.capacity]]</option>
+        </template>
+        </select>
+        <p>Date: </p>
+        <input type="date" name="bday" min="2017-01-01">
+
+        <p>From <input type="time" name="year_week"> To <input type="time" name="year_week"> </p>
+        <p>Project or Client <input type="text" name="firstname"> </p>
+        <p>Description <textarea rows="4" cols="50"> </p>
+
         <p>Employees from the office <b>dropdown select</b></p>
         <button type="button">Book</button>
         <button type=" button">Cancel</button>
 
         <!--Get all roms from appe -->
-        <template is="dom-repeat" items="{{rooms}}" as="room">
-            Room No:[[room.number]] Room Capacity:[[room.capacity]] <br>
-        </template>
 
     </template>
 
@@ -42,7 +48,7 @@
             properties: {
                 rooms: {
                     type: Array,
-                }
+                },
 
             },
 
