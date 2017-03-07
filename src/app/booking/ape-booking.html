@@ -33,6 +33,11 @@
         <button type=" button">Cancel</button>
 
         <!--Get all roms from appe -->
+     <select>
+        <template is="dom-repeat" items="{{employeesData}}" as="user">
+                 <option value="[[user.name]]">[[user.name]]</option>
+        </template>
+    </select>
 
     </template>
 
@@ -49,6 +54,10 @@
                 rooms: {
                     type: Array,
                 },
+                employeesData: {
+                    type: Array
+
+                }
 
             },
 
