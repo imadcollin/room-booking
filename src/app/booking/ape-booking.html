@@ -30,7 +30,7 @@
 
         <p> Please select employees will be in the meeting </p>
         <!--Get all roms from appe -->
-     <select>
+     <select id="selectEmployee" on-change="getSelectedEmployee">
         <template is="dom-repeat" items="{{employeesData}}" as="user">
                  <option value="[[user.name]]">[[user.name]]</option>
         </template>
@@ -76,6 +76,10 @@
                 SelectedDate: {
                     type: Date
                 },
+                selectedEmployee:{
+                    type:Object,
+                    value:{}
+                }
 
             },
 
@@ -135,6 +139,10 @@
                 this.selectedRoom = x.value;/*Where x.value is the current select room*/
 
             },
+            getSelectedEmployee: function () {
+                const emp=this._getValue(`selectEmployee`);
+                this.selectedEmployee=emp;
+            },
             getSelectedDate: function () {
 
             },
@@ -145,7 +153,8 @@
                 const _endtTime = this._getValue(`endTime`);
                 const _projecName = this._getValue(`projecName`);
                 const _description = this._getValue(`description`);
-                console.log(_projecName);
+                // console.log(this.selectedEmployee);
+
 
             },
             _getValue(param) {
