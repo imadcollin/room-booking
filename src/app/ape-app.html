@@ -40,24 +40,6 @@
                 flex-direction: column;
                 color: var(--primary-color);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             iron-pages {
                 display: flex;
                 flex-direction: column;
@@ -75,7 +57,7 @@
             <ape-employees selected="employees" user="[[user]]"></ape-employees>
             <ape-login selected="login" on-login-success="_listenerLoginSuccess"></ape-login>
             <ape-style selected="style"></ape-style>
-            <ape-rooms selected="rooms" employees-data="{{emploeeysData}}" rooms-data="{{roomsData}}"> </ape-rooms>
+            <ape-rooms selected="rooms" employees-data="{{emploeeysData}}"  avaliable-rooms="{{avaliableRooms}}"  booked-rooms="{{bookedRooms}}"rooms-data="{{roomsData}}"> </ape-rooms>
             <ape-booking selected="booking" employees-data="{{emploeeysData}}" rooms="{{roomsData}}"></ape-booking>
         </iron-pages>
 
