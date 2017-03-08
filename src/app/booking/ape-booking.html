@@ -52,10 +52,23 @@
             properties: {
                 rooms: {
                     type: Array,
+                    observer: `roomsStatus`
+                },
+                avaliableRooms: {
+                    type: Array,
+                    observer: `_avaliableRoomsStatus`
+                },
+                bookedRooms: {
+                    type: Array,
+                    observer: `_bookedRoomsStatus`
+
                 },
                 employeesData: {
                     type: Array
 
+                },
+                avaliable: {
+                    type: Boolean
                 }
 
             },
@@ -72,6 +85,24 @@
 
             detached() {
 
+            },
+            //Check the rooms status (booked or not) and create/push to appropriate array!
+            roomsStatus: function (rooms) {
+                let avaliableRooms = [];
+                let bookedRooms = [];
+
+                rooms.map(function (room) {
+                    if (room.available === true) {
+                        avaliableRooms.push(room);
+                    } else {
+                        bookedRooms.push(room);
+                    }
+                });
+
+            },
+
+            roomSelected: function () {
+                console.log(`hello there `);
             },
 
 
