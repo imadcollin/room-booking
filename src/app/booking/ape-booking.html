@@ -22,7 +22,7 @@
         </template>
         </select>
         <p>Date: </p>
-        <input type="date" name="bday" min="2017-01-01">
+        <input type="date" id="datetime"  min="2017-01-01">
 
         <p>From <input type="time" name="year_week"> To <input type="time" name="year_week"> </p>
         <p>Project or Client <input type="text" name="firstname"> </p>
@@ -36,7 +36,7 @@
         </template>
     </select>
     Actions
-        <button type="button">Book</button>
+        <button type="button" on-tap="booking">Book</button>
         <button type=" button">Cancel</button>
     </template>
 
@@ -69,7 +69,13 @@
                 },
                 avaliable: {
                     type: Boolean
-                }
+                },
+                selectedRoom: {
+                    type: Number,
+                },
+                SelectedDate: {
+                    type: Date
+                },
 
             },
 
@@ -125,9 +131,18 @@
                 });
             },
             getSelectedRoom: function () {
-                const x=document.getElementById(`roomSelect`);
-                console.log(`x value `,x.value);
+                const x = document.getElementById(`roomSelect`);
+                this.selectedRoom = x.value;/*Where x.value is the current select room*/
+
             },
+            getSelectedDate: function () {
+
+            },
+            booking() {
+                //Get selected datetime
+                const x = document.getElementById(`datetime`);
+                console.log(`date is`, x.value);
+            }
 
 
 
