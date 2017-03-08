@@ -154,6 +154,17 @@
                 const _projecName = this._getValue(`projecName`);
                 const _description = this._getValue(`description`);
                 console.log(this.selectedEmployee);
+                const collector = {
+                    datetime: _datetime,
+                    startTime: _startTime,
+                    endtTime: _endtTime,
+                    projecName: _projecName,
+                    description: _description
+
+                };
+                if (typeof (Storage) !== `undefined`) {
+                    localStorage.setItem(`collector`, JSON.stringify(collector));
+                }
 
 
             },

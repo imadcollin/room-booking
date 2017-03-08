@@ -46,6 +46,7 @@
         <template is="dom-repeat" items="[[employeesData]]" as="employee">
             [[employee.name]]
         </template>
+        <button type="button" on-tap="test"></button>
 
         </template>
 
@@ -103,6 +104,10 @@
                         }
                         this.employeesAtMeeting = employeesAtMeeting;
                     }
+                },
+                test: function () {
+                    let t = localStorage.getItem(`collector`);
+                    console.log(`here the test`, JSON.parse(t));
                 }
 
 
