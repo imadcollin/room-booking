@@ -16,9 +16,9 @@
         <h4>New Booking</h4>
 
         <p>Select a room "Should show avalialbe rooms wiht capacity" </p>
-        <select>
+        <select id="roomSelect" on-change="getSelectedRoom">
         <template is="dom-repeat" items="{{rooms}}" as="room">
-        <option value="[[room.number]]">[[room.capacity]]</option>
+        <option  value="[[room.number]]">[[room.capacity]]</option>
         </template>
         </select>
         <p>Date: </p>
@@ -124,8 +124,9 @@
                     return (x === y) ? 0 : x ? 1 : -1;
                 });
             },
-            roomSelected: function () {
-                //Some actions
+            getSelectedRoom: function () {
+                const x=document.getElementById(`roomSelect`);
+                console.log(`x value `,x.value);
             },
 
 
