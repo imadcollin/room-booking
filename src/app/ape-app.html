@@ -50,6 +50,14 @@
 
 
 
+
+
+
+
+
+
+
+
             iron-pages {
                 display: flex;
                 flex-direction: column;
@@ -100,7 +108,9 @@
                 },
                 roomsData: {
                     type: Array,
-                    value: () => []
+                    value: () => [],
+                    observer: `roomsStatus`
+
                 },
                 roomsRef: {
                     type: Object,
@@ -108,6 +118,16 @@
                 },
                 available: {
                     type: Boolean,
+                },
+
+                avaliableRooms: {
+                    type: Array,
+                    observer: `_avaliableRoomsStatus`
+                },
+                bookedRooms: {
+                    type: Array,
+                    observer: `_bookedRoomsStatus`
+
                 },
 
             },
@@ -153,6 +173,44 @@
 
             _listenerLoginSuccess() {
                 this.page = (this.router.page === ``) ? `home` : this.router.page;
+            },
+            //Check the rooms status (booked or not) and create/push to appropriate array!
+            roomsStatus: function (rooms) {
+                let avaliableRooms = [];
+                let bookedRooms = [];
+                rooms.map(function (room) {
+
+                    if (room.available === true) {
+                        avaliableRooms.push(room);
+                    } else if (room.available === false) {
+                        bookedRooms.push(room);
+                    } else {
+                        console.log(`no rooms registered`);
+                    }
+                });
+                //Set properties as status!
+                this.avaliableRooms = avaliableRooms;
+                this.bookedRooms = bookedRooms;
+            },
+            //Observer
+            _avaliableRoomsStatus: function (newArray) {
+                this._compareAvailableRooms(this.avaliableRooms);
+            },
+            //Observer
+            _bookedRoomsStatus: function (newArray) {
+                this._compareBookedRooms(this.bookedRooms);
+            },
+            _compareAvailableRooms(arr) {
+                arr.sort(function (x, y) {
+                    //retrun all available rooms where :room.avaiblity===true;
+                    return (x === y) ? 0 : x ? -1 : 1;
+                });
+            },
+            _compareBookedRooms(arr) {
+                arr.sort(function (x, y) {
+                    //retrun all available rooms where :room.avaiblity===false;
+                    return (x === y) ? 0 : x ? 1 : -1;
+                });
             },
 
         });
