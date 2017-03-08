@@ -11,13 +11,15 @@
                 padding: 1.6rem;
             }
 
+
+
             .showSelectedRooms[hide] {
                 display: none
             }
         </style>
 
-        <h2>Hello</h2>
-        <div>Avaliable room
+        <h2>Eooms View</h2>
+        <div>All registerd rooms:
             <!--Fetch the rooms -->
             <template is="dom-repeat" items="[[roomsData]]" as="room">
                 <li> Room No:[[room.number]] Capacity:[[room.capacity]] <br>
@@ -25,8 +27,16 @@
             </template>
         </div>
 
+        <div>Available rooms:
+            <!--Fetch the Available rooms -->
+            <template is="dom-repeat" items="[[avaliableRooms]]" as="room">
+                <li> Room No:[[room.number]] Capacity:[[room.capacity]] <br>
+                </li>
+            </template>
+        </div>
+
         <!--conditional repeat where the room is avialable  -->
-        <div>Booked rooms
+        <div>Booked rooms using dom-if
             <template is="dom-repeat" items="[[roomsData]]" as="room">
 
                 <template is="dom-if" if="{{!room.available}}">
@@ -34,7 +44,12 @@
                     <li> No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]</li>
                 </template>
         </div>
+        <div>Booked rooms using data-binding
+            <template is="dom-repeat" items="[[bookedRooms]]" as="room">
 
+                <li> No:[[room.number]] Capacity:[[room.capacity]] booked:[[room.available]]</li>
+            </template>
+        </div>
 
         <div>Employees at meeting with rooms number and time
             <li>Bob meet Alice from <b>13:00</b> to <b>14:30</b></li>
@@ -97,6 +112,12 @@
                     hide: {
                         type: Boolean,
                         value: true
+                    },
+                    avaliableRooms: {
+                        type: Array
+                    },
+                    bookedRooms:{
+                        type:Array
                     }
 
                 },
