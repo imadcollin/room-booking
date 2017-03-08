@@ -18,7 +18,7 @@
         <p>Select a room "Should show avalialbe rooms wiht capacity" </p>
         <select id="roomSelect" on-change="getSelectedRoom">
         <template is="dom-repeat" items="{{rooms}}" as="room">
-        <option  value="[[room.number]]">[[room.capacity]]</option>
+        <option  value="[[room.number]]">Room:[[room.number]] Capacity:[[room.capacity]]</option>
         </template>
         </select>
         <p>Date: </p>
@@ -37,7 +37,7 @@
     </select>
     Actions
         <button type="button" on-tap="booking">Book</button>
-        <button type=" button">Cancel</button>
+        <button type=" button" on-tap="goBack">Cancel</button>
     </template>
 
     <script>
@@ -76,9 +76,9 @@
                 SelectedDate: {
                     type: Date
                 },
-                selectedEmployee:{
-                    type:Object,
-                    value:{}
+                selectedEmployee: {
+                    type: Object,
+                    value: {}
                 }
 
             },
@@ -140,8 +140,8 @@
 
             },
             getSelectedEmployee: function () {
-                const emp=this._getValue(`selectEmployee`);
-                this.selectedEmployee=emp;
+                const emp = this._getValue(`selectEmployee`);
+                this.selectedEmployee = emp;
             },
             getSelectedDate: function () {
 
@@ -153,13 +153,17 @@
                 const _endtTime = this._getValue(`endTime`);
                 const _projecName = this._getValue(`projecName`);
                 const _description = this._getValue(`description`);
-                // console.log(this.selectedEmployee);
+                console.log(this.selectedEmployee);
 
 
             },
             _getValue(param) {
                 let x = document.getElementById(param);
                 return x.value;
+            },
+            goBack: function () {
+                //Use back navigation for now
+                window.location.href = ``;
             }
 
 
