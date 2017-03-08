@@ -90,20 +90,44 @@
             roomsStatus: function (rooms) {
                 let avaliableRooms = [];
                 let bookedRooms = [];
-
                 rooms.map(function (room) {
+
                     if (room.available === true) {
                         avaliableRooms.push(room);
-                    } else {
+                    } else if (room.available === false) {
                         bookedRooms.push(room);
+                    } else {
+                        console.log(`no rooms registered`);
                     }
                 });
-
+                //Set properties as status!
+                this.avaliableRooms = avaliableRooms;
+                this.bookedRooms = bookedRooms;
             },
-
+            //Observer
+            _avaliableRoomsStatus: function (newArray) {
+                this._compareAvailableRooms(this.avaliableRooms);
+            },
+            //Observer
+            _bookedRoomsStatus: function (newArray) {
+                this._compareBookedRooms(this.bookedRooms);
+            },
+            _compareAvailableRooms(arr) {
+                arr.sort(function (x, y) {
+                    //retrun all available rooms where :room.avaiblity===true;
+                    return (x === y) ? 0 : x ? -1 : 1;
+                });
+            },
+            _compareBookedRooms(arr) {
+                arr.sort(function (x, y) {
+                    //retrun all available rooms where :room.avaiblity===false;
+                    return (x === y) ? 0 : x ? 1 : -1;
+                });
+            },
             roomSelected: function () {
-                console.log(`hello there `);
+                //Some actions
             },
+
 
 
         });
