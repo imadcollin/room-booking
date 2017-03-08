@@ -22,11 +22,11 @@
         </template>
         </select>
         <p>Date: </p>
-        <input type="date" id="datetime"  min="2017-01-01">
+        <input type="date" id="datetime" min="2017-01-01">
 
-        <p>From <input type="time" name="year_week"> To <input type="time" name="year_week"> </p>
-        <p>Project or Client <input type="text" name="firstname"> </p>
-        <p>Description <textarea rows="4" cols="50"> </p>
+        <p>From <input type="time" id="startTime"> To <input type="time" id="endTime"> </p>
+        <p>Project or Client <input type="text" id="projecName"> </p>
+        <p>Description <textarea rows="4" cols="50" id="description"> </p>
 
         <p> Please select employees will be in the meeting </p>
         <!--Get all roms from appe -->
@@ -139,9 +139,18 @@
 
             },
             booking() {
-                //Get selected datetime
-                const x = document.getElementById(`datetime`);
-                console.log(`date is`, x.value);
+                //Get sproperties values
+                const _datetime = this._getValue(`datetime`);
+                const _startTime = this._getValue(`startTime`);
+                const _endtTime = this._getValue(`endTime`);
+                const _projecName = this._getValue(`projecName`);
+                const _description = this._getValue(`description`);
+                console.log(_projecName);
+
+            },
+            _getValue(param) {
+                let x = document.getElementById(param);
+                return x.value;
             }
 
 
