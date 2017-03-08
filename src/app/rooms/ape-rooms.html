@@ -10,6 +10,10 @@
                 flex-direction: column;
                 padding: 1.6rem;
             }
+
+            .showSelectedRooms[hide] {
+                display: none
+            }
         </style>
 
         <h2>Hello</h2>
@@ -46,7 +50,15 @@
         <template is="dom-repeat" items="[[employeesData]]" as="employee">
             [[employee.name]]
         </template>
-        <button type="button" on-tap="test"></button>
+
+        <button type="button" on-tap="showBookedRooms">Show booked rooms </button>
+        <div class="showSelectedRooms" hidden$="[[hide]]">
+            <p> You booked the Romm no:[[bookingData.selectedRoom]]</p>
+            <p> The Room description is:[[bookingData.description]]</p>
+            <p> The Room startTime is:[[bookingData.startTime]]</p>
+            <p> The Room endtTime is:[[bookingData.endtTime]]</p>
+            <p> The Room projecName is:[[bookingData.projecName]]</p>
+        </div>
 
         </template>
 
@@ -76,6 +88,14 @@
                     employeesAtMeeting: {
                         type: Array,
                         observer: `employeesAtMeetingStatus`
+                    },
+                    bookingData: {
+                        type: Object,
+                        value: {}
+                    },
+                    hide: {
+                        type: Boolean,
+                        value: true
                     }
 
                 },
@@ -105,9 +125,11 @@
                         this.employeesAtMeeting = employeesAtMeeting;
                     }
                 },
-                test: function () {
-                    let t = localStorage.getItem(`collector`);
-                    console.log(`here the test`, JSON.parse(t));
+                showBookedRooms: function () {
+                    let collector = localStorage.getItem(`collector`);
+                    console.log(`here the test`, JSON.parse(collector));
+                    this.bookingData = JSON.parse(collector);
+                    this.hide = false;
                 }
 
 
