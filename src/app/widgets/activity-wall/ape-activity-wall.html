@@ -13,17 +13,11 @@
                 width: 100%;
                 height: 100%;
             }
-
-
-
             .card-container {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
             }
-
-
-
             .card {
                 display: block;
                 flex-grow: 0;
@@ -33,32 +27,20 @@
                 padding: 0.8rem 0.8rem 0 0.8rem;
                 margin-bottom: 1.6rem;
             }
-
-
-
             .profile-img {
                 width: 100%;
                 object-fit: cover;
                 margin-bottom: .8rem;
             }
-
-
-
             .profile-img:after {
                 content: "";
                 display: block;
                 padding-bottom: 100%;
             }
-
-
-
             .text-container {
                 display: flex;
                 align-items: center;
             }
-
-
-
             .status {
                 display: none;
                 flex-grow: 0;
@@ -69,35 +51,33 @@
                 border-radius: 50%;
                 background-color: var(--primary-color);
             }
-
-
-
             .name {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 padding-right: .4rem;
                 /*font-size: 1.6rem;*/
-                font-size: smaller;
             }
-
-
-
             .card[out-of-office] {
                 opacity: 0.5;
             }
-
-
-
             .status[meeting] {
                 display: block;
             }
-
-
             .card_layout {
                 position: relative;
                 background: white;
                 padding: 7%;
+            }
+            .Birthday[has-birth-day] {
+                position: absolute;
+                width: 30%;
+                height: 30%;
+                top: 60%;
+                right: -4%;
+                background: darkred;
+                /*Add placeholder*/
+                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             }
         </style>
 
@@ -105,13 +85,12 @@
             <template is="dom-repeat" items="[[usersData]]" as="user" sort="_sort">
                 <div class="card" out-of-office$="[[!user.isInOffice]]">
                     <div class="card_layout">
-                        <div class="ribbon">
+                        <div class="Birthday" has-birth-day$=[[user.hasBirthdayToday]]> </div>
 
-                            <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
-                            <div class="text-container">
-                                <div class="status" meeting$="[[user.isInMeeting]]"></div>
-                                <div class="name">[[user.firstname]] [[user.lastname]]</div>
-                            </div>
+                        <img class="profile-img" src="[[user.imageURL]]" alt="[[user.firstname]] [[user.lastname]]">
+                        <div class="text-container">
+                            <div class="status" meeting$="[[user.isInMeeting]]"></div>
+                            <div class="name">[[user.firstname]] [[user.lastname]]</div>
                         </div>
                     </div>
 
@@ -121,15 +100,12 @@
 
     </template>
 
+
     <script>
         Polymer({
-
             is: `ape-activity-wall`,
-
             behaviors: [
-
             ],
-
             properties: {
                 usersData: {
                     type: Array,
@@ -138,16 +114,11 @@
                 usersRef: {
                     type: Object,
                     value: () => null
-
                 }
             },
-
             /* Life cycle */
-
             ready() {
-
             },
-
             attached() {
                 this.usersRef = firebase.database().ref(`/users`).limitToFirst(25);//Where LimitToFirst is Firebase query
                 this.usersRef.on(`value`, (data) => {
@@ -155,17 +126,15 @@
                     this.usersData = Object.keys(items).map(key => items[key]);
                 });
             },
-
             detached() {
-
             },
-
             _sort(a, b) {
                 if (a.firstname === b.firstname) return 0;
                 return a.firstname < b.firstname ? -1 : 1;
             },
-
         });
     </script>
 
 </dom-module>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
