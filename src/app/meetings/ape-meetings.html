@@ -10,17 +10,77 @@
                 flex-direction: column;
                 padding: 1.6rem;
             }
+
+            .layout {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                width: 20%;
+            }
+
+            .card2 {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                width: 40%;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                padding: 2px 16px;
+            }
+
+            img {
+                width: 100%;
+            }
         </style>
 
         <h3>Placeholders</h3>
         <h1>Today's Meetings </h1>
-        <p> Eva.avatar... Bob.avatar Meeting start at: 13:50 end at: 16:00</p>
-        <p> Eva.avatar... Bob.avatar Meeting start at: 13:50 end at: 16:00</p>
-        <p> Eva.avatar... Bob.avatar Meeting start at: 13:50 end at: 16:00</p>
+        <div class="layout">
+
+            <div class="card">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar">
+                <div class="container">
+                    <h4><b>John Doe</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar">
+                <div class="container">
+                    <h4><b>Eva Bulb</b></h4>
+                    <p>Android & Developer</p>
+
+                    <p>Purpose:Make the life beeter place </p>
+                </div>
+            </div>
+
+        </div>
+
+
         <h1>Week's Events </h1>
         <p> Tech Fika</p>
-        <p><i>Orgnizer:</i>Alice.avatar</p>
-        <p><i>  Meeting start at:</i> 13:50 end at: 16:00</p>
+        <div class="layout2">
+
+            <div class="card2">
+                <img src="/assets/media/apegroup/14.jpg" alt="Avatar">
+                <div class="container">
+                    <h4><b>Orgnizer:Alice</b></h4>
+                    <p>Architect & Engineer</p>
+                    <p><i>  Meeting start at:</i> 13:50 end at: 16:00</p>
+                </div>
+            </div>
+
+        </div>
+
     </template>
 
     <script>
