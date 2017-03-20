@@ -7,15 +7,20 @@
         <style>
              :host {
                 display: flex;
+                display: flex;
                 flex-direction: column;
-                padding: 1.6rem;
+                flex-grow: 1;
+                position: relative;
             }
 
             .layout {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
+                justify-content: space-around;
             }
+
+            .layout2 {}
 
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -26,7 +31,8 @@
             .card2 {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
                 transition: 0.3s;
-                width: 40%;
+                width: 50%;
+                margin-left: 25%;
             }
 
             .card:hover {
@@ -58,8 +64,6 @@
                 <div class="container">
                     <h4><b>Eva Bulb</b></h4>
                     <p>Android & Developer</p>
-
-                    <p>Purpose:Make the life beeter place </p>
                 </div>
             </div>
 
