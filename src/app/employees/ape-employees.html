@@ -3,6 +3,7 @@
 <link rel="import" href="../widgets/time/ape-time.html">
 <link rel="import" href="../widgets/weather/ape-weather.html">
 <link rel="import" href="../shared/animation/ape-animation.html">
+<link rel="import" href="../meetings/ape-meetings.html">
 
 <dom-module id="ape-employees">
 
@@ -56,6 +57,7 @@
                 padding: 0;
                 font-size: 7.2rem;
                 font-weight: 700;
+                font-family: serif;
             }
 
 
@@ -75,13 +77,14 @@
             }
         </style>
         <div class="header">
-            <h1>Apewall</h1>
+            <h1>APE WALL</h1>
             <ape-time></ape-time>
         </div>
 
         <ape-activity-wall class="widget" active></ape-activity-wall>
         <ape-weather class="widget"></ape-weather>
         <ape-animation> </ape-animation>
+        <!--<ape-meetings class="widget">   </ape-meetings>-->
 
     </template>
 

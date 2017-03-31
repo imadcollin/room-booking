@@ -5,8 +5,7 @@
     <template>
 
         <style>
-
-            :host {
+             :host {
                 position: relative;
                 display: flex;
                 width: 100%;
@@ -18,12 +17,11 @@
                 /*background-color: #fff;*/
                 font-size: 7rem;
                 font-weight: 700;
+                font-family: serif;
+                text-transform: uppercase;
             }
 
-            .time {
-
-            }
-
+            .time {}
         </style>
 
         <div class="time">[[time]]</div>
@@ -31,7 +29,6 @@
     </template>
 
     <script>
-
         Polymer({
 
             is: `ape-time`,
@@ -74,7 +71,7 @@
 
                 // set the formatted time
                 // this.time =  `${hourFormatted}:${minutesFormatted}:${secondsFormatted}`;
-                this.time =  `${hourFormatted}:${minutesFormatted}`;
+                this.time = `${hourFormatted}:${minutesFormatted}`;
 
                 // recursively call the function again
                 this._timeoutId = setTimeout(this._startClock.bind(this), 1000);
@@ -97,7 +94,6 @@
             }
 
         });
-
     </script>
 
 </dom-module>
